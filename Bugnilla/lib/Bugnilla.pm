@@ -16,12 +16,20 @@ use Catalyst::Runtime 5.80;
 # Static::Simple: will serve static files from the application's root
 #                 directory
 
+# make sure and add "requires ...StackTrace;" and anything else below that to Makefile.PL
+# requires 'Catalyst::Plugin::StackTrace';
+#
 use Catalyst qw/
     -Debug
     ConfigLoader
     Static::Simple
 
     StackTrace
+
+    Authentication
+    Session
+    Session::Store::File
+    Session::State::Cookie
 /;
 
 extends 'Catalyst';
@@ -54,6 +62,26 @@ __PACKAGE__->config(
         ],
     },
 );
+
+# Configure SimpleDB Authentication
+__PACKAGE__->config(
+    'Plugin::Authentication' => {
+        default => {
+            class           => 'SimpleDB',
+            user_model      => 'DB::User',
+            password_type   => 'clear',
+        },
+    },
+);
+# above can be converted to secure config file as follows: add the next 7 lines to bugnilla.conf
+#<Plugin::Authentication>
+#    <default>
+#        password_type clear
+#        user_model    DB::User
+#        class         SimpleDB
+#    </default>
+#</Plugin::Authentication>
+
 
 # Start the application
 __PACKAGE__->setup();

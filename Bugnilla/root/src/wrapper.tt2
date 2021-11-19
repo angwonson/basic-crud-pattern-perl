@@ -22,7 +22,7 @@
     <ul>
         <li><a href="[% c.uri_for('/')
             %]" title="Catalyst Welcome Page">Welcome</a></li>
-        <li><a href="[% c.uri_for('/tickets/list') %]">Tickets</a></li>
+        <li><a href="[% c.uri_for('/tickets/list') %]">List Tickets</a></li>
         <li><a href="[% c.uri_for('/tickets/create_form') %]">Create A Ticket</a></li>
     </ul>
 </div><!-- end menu -->

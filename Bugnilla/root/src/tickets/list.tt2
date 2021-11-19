@@ -26,4 +26,9 @@
     </td>
   </tr>
 [% END -%]
+
+<p>
+    <a href="[% c.uri_for('/login') %]">Login</a>
+    <a href="[% c.uri_for(c.controller.action_for('create_form')) %]">Create</a>
+</p>
 </table>

@@ -1,4 +1,4 @@
-package Bugnilla::Controller::Bugs;
+package Bugnilla::Controller::Tickets;
 use Moose;
 use namespace::autoclean;
 
@@ -6,7 +6,7 @@ BEGIN { extends 'Catalyst::Controller'; }
 
 =head1 NAME
 
-Bugnilla::Controller::Bugs - Catalyst Controller
+Bugnilla::Controller::Tickets - Catalyst Controller
 
 =head1 DESCRIPTION
 
@@ -24,12 +24,12 @@ Catalyst Controller.
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
-    $c->response->body('Matched Bugnilla::Controller::Bugs in Bugs.');
+    $c->response->body('Matched Bugnilla::Controller::Tickets in Tickets.');
 }
 
 =head2 list
  
-Fetch all bug objects and pass to bugs/list.tt2 in stash to be displayed
+Fetch all ticket objects and pass to tickets/list.tt2 in stash to be displayed
  
 =cut
  
@@ -39,16 +39,14 @@ sub list :Local {
     # that make up the application
     my ($self, $c) = @_;
  
-    # Retrieve all of the bug records as bug model objects and store in the
+    # Retrieve all of the ticket records as ticket model objects and store in the
     # stash where they can be accessed by the TT template
-    # $c->stash(bugs => [$c->model('DB::Bug')->all]);
-    # But, for now, use this code until we create the model later
-    $c->stash(bugs => '');
- 
+    $c->stash(tickets => [$c->model('DB::Ticket')->all]);
+
     # Set the TT template to use.  You will almost always want to do this
     # in your action methods (action methods respond to user input in
     # your controllers).
-    $c->stash(template => 'bugs/list.tt2');
+    $c->stash(template => 'tickets/list.tt2');
 }
 
 

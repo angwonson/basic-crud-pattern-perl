@@ -10,3 +10,6 @@ I would not usually put a database, even SQLite into git, but the instructions s
 
 Create the Schema in Catalyst (again this has already been done so just documenting how it was achieved):
 ./init_schema_from_db.sh
+
+Update the Schema in Catalyst:
+./update_schema_from_db.sh

@@ -1,20 +1,20 @@
 [% # This is a TT comment. -%]
  
 [%- # Provide a title -%]
-[% META title = 'Bug List' -%]
+[% META title = 'Ticket List' -%]
  
 [% # Note That the '-' at the beginning or end of TT code  -%]
 [% # "chomps" the whitespace/newline at that end of the    -%]
 [% # output (use View Source in browser to see the effect) -%]
  
-[% # Some basic HTML with a loop to display bugs -%]
+[% # Some basic HTML with a loop to display tickets -%]
 <table>
-<tr><th>Title</th><th>Rating</th><th>Author(s)</th></tr>
-[% # Display each bug in a table row %]
-[% FOREACH bug IN bugs -%]
+<tr><th>Title</th><th>Status</th><th>Developer</th></tr>
+[% # Display each ticket in a table row %]
+[% FOREACH ticket IN tickets -%]
   <tr>
-    <td>[% bug.title %]</td>
-    <td>[% bug.rating %]</td>
+    <td>[% ticket.title %]</td>
+    <td>[% ticket.status_id %]</td>
     <td></td>
   </tr>
 [% END -%]

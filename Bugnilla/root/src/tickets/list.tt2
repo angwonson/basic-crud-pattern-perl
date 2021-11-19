@@ -9,13 +9,14 @@
  
 [% # Some basic HTML with a loop to display tickets -%]
 <table>
-<tr><th>Title</th><th>Status</th><th>Developer</th></tr>
+<tr><th>ID</th><th>Title</th><th>Status</th><th>Developer</th></tr>
 [% # Display each ticket in a table row %]
 [% FOREACH ticket IN tickets -%]
   <tr>
+    <td>[% ticket.id %]</td>
     <td>[% ticket.title %]</td>
-    <td>[% ticket.status_id %]</td>
-    <td></td>
+    <td>[% ticket.status.status %]</td>
+    <td>[% ticket.developer.first_name %]</td>
   </tr>
 [% END -%]
 </table>

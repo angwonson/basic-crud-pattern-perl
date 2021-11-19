@@ -1,6 +1,3 @@
-[% # This is a TT comment. -%]
- 
-[%- # Provide a title -%]
 [% META title = 'Ticket List' -%]
  
 [% # Note That the '-' at the beginning or end of TT code  -%]
@@ -9,7 +6,7 @@
  
 [% # Some basic HTML with a loop to display tickets -%]
 <table>
-<tr><th>ID</th><th>Title</th><th>Status</th><th>Developer</th></tr>
+<tr><th>ID</th><th>Title</th><th>Status</th><th>Developer</th><th>Links</th></tr>
 [% # Display each ticket in a table row %]
 [% FOREACH ticket IN tickets -%]
   <tr>
@@ -23,6 +20,10 @@
     Not Assigned
 [% END %]
 </td>
+    <td>
+        [% # Add a link to delete a ticket %]
+        <a href="[% c.uri_for(c.controller.action_for('delete'), [ticket.id]) %]">Delete</a>
+    </td>
   </tr>
 [% END -%]
 </table>

@@ -24,8 +24,10 @@ CREATE TABLE ticket (
         id          INTEGER PRIMARY KEY,
         title       TEXT NOT NULL,
         developer_id      INTEGER REFERENCES developer(id),
-        status_id      INTEGER REFERENCES status(id) DEFAULT 1
+        status_id      INTEGER REFERENCES status(id) DEFAULT 1,
+    created TIMESTAMP,
+    updated TIMESTAMP
 );
-INSERT INTO ticket VALUES (1, 'Build a website', 3, 1);
-INSERT INTO ticket VALUES (2, 'Have some coffee', 1, 2);
-INSERT INTO ticket VALUES (3, 'Read a book', 2, 5);
+INSERT INTO ticket VALUES (1, 'Build a website', 3, 1, datetime('now'), datetime('now'));
+INSERT INTO ticket VALUES (2, 'Have some coffee', 1, 2, datetime('now'), datetime('now'));
+INSERT INTO ticket VALUES (3, 'Read a book', 2, 5, datetime('now'), datetime('now'));

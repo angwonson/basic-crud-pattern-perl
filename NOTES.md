@@ -20,3 +20,7 @@ script/bugnilla_test.pl "/tickets/list" | lynx -stdin
 
 enable DBIC debugging in catalyst server:
 DBIC_TRACE=1 script/bugnilla_server.pl -r
+
+add additional files to schema folder to update db schema, such as 
+schema/tickets_20211118.sql
+Make sure to rerun ./update_schema_from_db.sh after altering the db schema

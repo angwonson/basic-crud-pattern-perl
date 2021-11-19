@@ -49,12 +49,18 @@ __PACKAGE__->table("ticket");
   data_type: 'text'
   is_nullable: 1
 
+=head2 developer_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 0
+
 =head2 status_id
 
   data_type: 'integer'
   default_value: 1
   is_foreign_key: 1
-  is_nullable: 1
+  is_nullable: 0
 
 =cut
 
@@ -63,12 +69,14 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "title",
   { data_type => "text", is_nullable => 1 },
+  "developer_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "status_id",
   {
     data_type      => "integer",
     default_value  => 1,
     is_foreign_key => 1,
-    is_nullable    => 1,
+    is_nullable    => 0,
   },
 );
 
@@ -86,6 +94,21 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
+=head2 developer
+
+Type: belongs_to
+
+Related object: L<Bugnilla::Schema::Result::Developer>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "developer",
+  "Bugnilla::Schema::Result::Developer",
+  { id => "developer_id" },
+  { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
+);
+
 =head2 status
 
 Type: belongs_to
@@ -98,42 +121,12 @@ __PACKAGE__->belongs_to(
   "status",
   "Bugnilla::Schema::Result::Status",
   { id => "status_id" },
-  {
-    is_deferrable => 0,
-    join_type     => "LEFT",
-    on_delete     => "NO ACTION",
-    on_update     => "NO ACTION",
-  },
+  { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
 );
 
-=head2 ticket_developers
 
-Type: has_many
-
-Related object: L<Bugnilla::Schema::Result::TicketDeveloper>
-
-=cut
-
-__PACKAGE__->has_many(
-  "ticket_developers",
-  "Bugnilla::Schema::Result::TicketDeveloper",
-  { "foreign.ticket_id" => "self.id" },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
-
-=head2 developers
-
-Type: many_to_many
-
-Composing rels: L</ticket_developers> -> developer
-
-=cut
-
-__PACKAGE__->many_to_many("developers", "ticket_developers", "developer");
-
-
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-18 16:55:49
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:KP+tJ83sZKSsn7lBZ2177Q
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-18 17:38:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:A9P3dgOSYKtF2LakYBFElA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

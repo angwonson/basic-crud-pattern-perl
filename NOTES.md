@@ -19,4 +19,4 @@ script/bugnilla_test.pl "/tickets/list" | lynx -stdin
 
 
 enable DBIC debugging in catalyst server:
-export DBIC_TRACE=1
+DBIC_TRACE=1 script/bugnilla_server.pl -r

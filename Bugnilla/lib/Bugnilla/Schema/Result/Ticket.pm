@@ -47,20 +47,20 @@ __PACKAGE__->table("ticket");
 =head2 title
 
   data_type: 'text'
-  is_nullable: 1
+  is_nullable: 0
 
 =head2 developer_id
 
   data_type: 'integer'
   is_foreign_key: 1
-  is_nullable: 0
+  is_nullable: 1
 
 =head2 status_id
 
   data_type: 'integer'
   default_value: 1
   is_foreign_key: 1
-  is_nullable: 0
+  is_nullable: 1
 
 =cut
 

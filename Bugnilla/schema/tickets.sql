@@ -22,9 +22,9 @@ INSERT INTO developer VALUES (3, 'Charlie');
 
 CREATE TABLE ticket (
         id          INTEGER PRIMARY KEY,
-        title       TEXT ,
-        developer_id      INTEGER REFERENCES developer(id) NOT NULL,
-        status_id      INTEGER REFERENCES status(id) DEFAULT 1 NOT NULL
+        title       TEXT NOT NULL,
+        developer_id      INTEGER REFERENCES developer(id),
+        status_id      INTEGER REFERENCES status(id) DEFAULT 1
 );
 INSERT INTO ticket VALUES (1, 'Build a website', 3, 1);
 INSERT INTO ticket VALUES (2, 'Have some coffee', 1, 2);

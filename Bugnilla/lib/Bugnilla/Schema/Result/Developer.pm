@@ -72,34 +72,24 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
-=head2 ticket_developers
+=head2 tickets
 
 Type: has_many
 
-Related object: L<Bugnilla::Schema::Result::TicketDeveloper>
+Related object: L<Bugnilla::Schema::Result::Ticket>
 
 =cut
 
 __PACKAGE__->has_many(
-  "ticket_developers",
-  "Bugnilla::Schema::Result::TicketDeveloper",
+  "tickets",
+  "Bugnilla::Schema::Result::Ticket",
   { "foreign.developer_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-=head2 tickets
 
-Type: many_to_many
-
-Composing rels: L</ticket_developers> -> ticket
-
-=cut
-
-__PACKAGE__->many_to_many("tickets", "ticket_developers", "ticket");
-
-
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-18 16:55:49
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:K9q/eyJCU3OwfU0r//ozMA
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-18 17:38:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:f/cy8UTFtFGZfi3crHeF7w
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

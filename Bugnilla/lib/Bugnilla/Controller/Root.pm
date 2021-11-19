@@ -6,7 +6,7 @@ BEGIN { extends 'Catalyst::Controller' }
 
 #
 # Sets the actions in this controller to be registered with no prefix
-# so they function identically to actions created in MyApp.pm
+# so they function identically to actions created in Bugnilla.pm
 #
 __PACKAGE__->config(namespace => '');
 

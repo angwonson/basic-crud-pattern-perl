@@ -1,0 +1,10 @@
+[% META title = 'Manual Form Ticket Create' -%]
+ 
+<form method="post" action="[% c.uri_for('create_form_do') %]">
+<table>
+    <tr><td>Title:</td><td><input type="text" name="title"></td></tr>
+    <tr><td>Status:</td><td><input type="text" name="status_id"></td></tr>
+    <tr><td>Developer:</td><td><input type="text" name="developer_id"></td></tr>
+</table>
+<input type="submit" name="Submit" value="Submit">
+</form>

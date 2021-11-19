@@ -24,11 +24,13 @@ extends 'DBIx::Class::Core';
 
 =item * L<DBIx::Class::InflateColumn::DateTime>
 
+=item * L<DBIx::Class::TimeStamp>
+
 =back
 
 =cut
 
-__PACKAGE__->load_components("InflateColumn::DateTime");
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp");
 
 =head1 TABLE: C<status>
 
@@ -88,8 +90,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-18 16:55:49
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:APZ+tFyH/a4JKHd13oS62A
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-18 21:11:58
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:F8G3uHVjOCaNb5YYJa2nDg
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

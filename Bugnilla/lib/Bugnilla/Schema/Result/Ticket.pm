@@ -24,11 +24,13 @@ extends 'DBIx::Class::Core';
 
 =item * L<DBIx::Class::InflateColumn::DateTime>
 
+=item * L<DBIx::Class::TimeStamp>
+
 =back
 
 =cut
 
-__PACKAGE__->load_components("InflateColumn::DateTime");
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp");
 
 =head1 TABLE: C<ticket>
 
@@ -62,22 +64,36 @@ __PACKAGE__->table("ticket");
   is_foreign_key: 1
   is_nullable: 1
 
+=head2 created
+
+  data_type: 'timestamp'
+  is_nullable: 1
+
+=head2 updated
+
+  data_type: 'timestamp'
+  is_nullable: 1
+
 =cut
 
 __PACKAGE__->add_columns(
   "id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "title",
-  { data_type => "text", is_nullable => 1 },
+  { data_type => "text", is_nullable => 0 },
   "developer_id",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "status_id",
   {
     data_type      => "integer",
     default_value  => 1,
     is_foreign_key => 1,
-    is_nullable    => 0,
+    is_nullable    => 1,
   },
+  "created",
+  { data_type => "timestamp", is_nullable => 1 },
+  "updated",
+  { data_type => "timestamp", is_nullable => 1 },
 );
 
 =head1 PRIMARY KEY
@@ -106,7 +122,12 @@ __PACKAGE__->belongs_to(
   "developer",
   "Bugnilla::Schema::Result::Developer",
   { id => "developer_id" },
-  { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
 =head2 status
@@ -121,14 +142,30 @@ __PACKAGE__->belongs_to(
   "status",
   "Bugnilla::Schema::Result::Status",
   { id => "status_id" },
-  { is_deferrable => 0, on_delete => "NO ACTION", on_update => "NO ACTION" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-18 17:38:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:A9P3dgOSYKtF2LakYBFElA
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-18 21:22:44
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:aW2nFwYIoquKuSdCmTQXNw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 __PACKAGE__->meta->make_immutable;
+
+#
+# Enable automatic date handling
+#
+__PACKAGE__->add_columns(
+    "created",
+    { data_type => 'timestamp', set_on_create => 1 },
+    "updated",
+    { data_type => 'timestamp', set_on_create => 1, set_on_update => 1 },
+);
+
 1;

@@ -1,1 +1,1 @@
-Run script/bugnilla_server.pl to test the application.
+Run script/bugnilla_server.pl -r to test the application.

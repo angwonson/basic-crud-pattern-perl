@@ -17,4 +17,3 @@ script/bugnilla_server.pl -r
 
 Web server is now up and running at the following url:
 http://localhost:3000/
-

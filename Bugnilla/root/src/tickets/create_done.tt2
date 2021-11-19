@@ -2,7 +2,7 @@
 [% # Not a good idea for production use, though. :-)  'Indent=1' is      -%]
 [% # optional, but prevents "massive indenting" of deeply nested objects -%]
 [% USE Dumper(Indent=1) -%]
- 
+
 [% # Set the page title.  META can 'go back' and set values in templates -%]
 [% # that have been processed 'before' this template (here it's updating -%]
 [% # the title in the root/src/wrapper.tt2 wrapper template).  Note that -%]
@@ -10,22 +10,21 @@
 [% # interpolation -- if you need dynamic/interpolated content in your   -%]
 [% # title, set "$c->stash(title => $something)" in the controller).     -%]
 [% META title = 'Ticket Created' %]
- 
+
 [% # Output information about the record that was added.  First title.   -%]
 <p>Added ticket '[% ticket.title %]'
- 
+
 [% # Then, output the last name of the first author -%]
-by '[% ticket.authors.first.last_name %]'
- 
-[% # Then, output the rating for the ticket that was added -%]
-with a rating of [% ticket.rating %].</p>
- 
+<!-- by '[% ticket.authors.first_name %]' -->
+
 [% # Provide a link back to the list page.  'c.uri_for' builds -%]
 [% # a full URI; e.g., 'http://localhost:3000/tickets/list'      -%]
 <p><a href="[% c.uri_for('/tickets/list') %]">Return to list</a></p>
- 
+
 [% # Try out the TT Dumper (for development only!) -%]
 <pre>
+<!-- 
 Dump of the 'ticket' variable:
-[% Dumper.dump(ticket) %]
+[% # Dumper.dump(ticket) %]
+-->
 </pre>

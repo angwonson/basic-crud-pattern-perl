@@ -140,5 +140,14 @@ __PACKAGE__->many_to_many("roles", "user_roles", "role");
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
+
+# many_to_many():
+#   args:
+#     1) Name of relationship, DBIC will create accessor with this name
+#     2) Name of has_many() relationship this many_to_many() is shortcut for
+#     3) Name of belongs_to() relationship in model class of has_many() above
+#   You must already have the has_many() defined to use a many_to_many().
+__PACKAGE__->many_to_many(roles => 'user_roles', 'role');
+
 __PACKAGE__->meta->make_immutable;
 1;

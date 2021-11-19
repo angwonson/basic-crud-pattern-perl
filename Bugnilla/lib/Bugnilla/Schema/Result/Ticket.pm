@@ -156,7 +156,6 @@ __PACKAGE__->belongs_to(
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
-__PACKAGE__->meta->make_immutable;
 
 #
 # Enable automatic date handling
@@ -168,4 +167,5 @@ __PACKAGE__->add_columns(
     { data_type => 'timestamp', set_on_create => 1, set_on_update => 1 },
 );
 
+__PACKAGE__->meta->make_immutable;
 1;

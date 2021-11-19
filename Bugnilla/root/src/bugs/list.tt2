@@ -1,0 +1,21 @@
+[% # This is a TT comment. -%]
+ 
+[%- # Provide a title -%]
+[% META title = 'Bug List' -%]
+ 
+[% # Note That the '-' at the beginning or end of TT code  -%]
+[% # "chomps" the whitespace/newline at that end of the    -%]
+[% # output (use View Source in browser to see the effect) -%]
+ 
+[% # Some basic HTML with a loop to display bugs -%]
+<table>
+<tr><th>Title</th><th>Rating</th><th>Author(s)</th></tr>
+[% # Display each bug in a table row %]
+[% FOREACH bug IN bugs -%]
+  <tr>
+    <td>[% bug.title %]</td>
+    <td>[% bug.rating %]</td>
+    <td></td>
+  </tr>
+[% END -%]
+</table>

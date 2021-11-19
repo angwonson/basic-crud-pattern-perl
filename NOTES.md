@@ -24,3 +24,8 @@ DBIC_TRACE=1 script/bugnilla_server.pl -r
 add additional files to schema folder to update db schema, such as 
 schema/tickets_20211118.sql
 Make sure to rerun ./update_schema_from_db.sh after altering the db schema
+
+Here is how to export configs from Bugnilla.pm to be used instead in Bugnilla.conf
+Soem examples would be database password, Auth configs, etc
+$ CATALYST_DEBUG=0 perl -Ilib -e 'use Bugnilla; use Config::General;
+Config::General->new->save_file("myapp.conf", Bugnilla->config);'

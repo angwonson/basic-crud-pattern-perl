@@ -5,7 +5,7 @@ use namespace::autoclean;
 extends 'Catalyst::View::TT';
 
 __PACKAGE__->config(
-    TEMPLATE_EXTENSION => '.tt2',
+#    TEMPLATE_EXTENSION => '.tt2',
 
     # Set the location for TT files
     INCLUDE_PATH => [

@@ -46,7 +46,7 @@ sub list :Local {
     # Set the TT template to use.  You will almost always want to do this
     # in your action methods (action methods respond to user input in
     # your controllers).
-    $c->stash(template => 'tickets/list.tt2');
+    $c->stash(template => 'tickets/list.tt2'); # this is default so no need to specify unless you want to use $c->forward or $c->detach
 }
 
 

@@ -13,3 +13,10 @@ Create the Schema in Catalyst (again this has already been done so just document
 
 Update the Schema in Catalyst:
 ./update_schema_from_db.sh
+
+TEST from cli:
+script/bugnilla_test.pl "/tickets/list" | lynx -stdin
+
+
+enable DBIC debugging in catalyst server:
+export DBIC_TRACE=1

@@ -63,16 +63,18 @@ __PACKAGE__->config(
     },
 );
 
+# AUTH was moved to config file
+#
 # Configure SimpleDB Authentication
-__PACKAGE__->config(
-    'Plugin::Authentication' => {
-        default => {
-            class           => 'SimpleDB',
-            user_model      => 'DB::User',
-            password_type   => 'clear',
-        },
-    },
-);
+#__PACKAGE__->config(
+#    'Plugin::Authentication' => {
+#        default => {
+#            class           => 'SimpleDB',
+#            user_model      => 'DB::User',
+#            password_type   => 'clear',
+#        },
+#    },
+#);
 # above can be converted to secure config file as follows: add the next 7 lines to bugnilla.conf
 #<Plugin::Authentication>
 #    <default>

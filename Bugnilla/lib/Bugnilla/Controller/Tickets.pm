@@ -49,6 +49,42 @@ sub list :Local {
     $c->stash(template => 'tickets/list.tt2'); # this is default so no need to specify unless you want to use $c->forward or $c->detach
 }
 
+=head2 url_create
+
+Create a ticket with the supplied title, status_id (default should be "New", and developer_id can be blank (unassigned)
+
+=cut
+ 
+sub url_create :Local {
+    # In addition to self & context, get the title, status_id, &
+    # developer_id args from the URL.  Note that Catalyst automatically
+    # puts extra information after the "/<controller_name>/<action_name/"
+    # into @_.  The args are separated  by the '/' char on the URL.
+    my ($self, $c, $title, $status_id, $developer_id) = @_;
+
+    # Call create() on the ticket model object. Pass the table
+    # columns/field values we want to set as hash values
+    my $ticket = $c->model('DB::Ticket')->create({
+            title  => $title
+#            , status_id => $status_id
+#            , developer_id => $developer_id
+        });
+
+    # Add a record to the join table for this ticket, mapping to
+    # appropriate author
+    #$ticket->add_to_ticket_authors({developer_id => $developer_id});
+    # Note: Above is a shortcut for this:
+    # $ticket->create_related('ticket_authors', {developer_id => $developer_id});
+
+    # Assign the Ticket object to the stash for display and set template
+    $c->stash(ticket     => $ticket,
+              template => 'tickets/create_done.tt2');
+
+    # Disable caching for this page
+    $c->response->header('Cache-Control' => 'no-cache');
+}
+
+
 
 =encoding utf8
 

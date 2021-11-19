@@ -20,7 +20,7 @@
 <div id="menu">
     Navigation:
     <ul>
-        <li><a href="[% c.uri_for('/books/list') %]">Home</a></li>
+        <li><a href="[% c.uri_for('/tickets/list') %]">Home</a></li>
         <li><a href="[% c.uri_for('/')
             %]" title="Catalyst Welcome Page">Welcome</a></li>
     </ul>
@@ -35,7 +35,7 @@
 </div><!-- end content -->
 </div><!-- end bodyblock -->
  
-<div id="footer">Copyright (c) your name goes here</div>
+<div id="footer">Copyright (c) @angwonson</div>
 </div><!-- end outer -->
  
 </body>

@@ -16,7 +16,13 @@
     <td>[% ticket.id %]</td>
     <td>[% ticket.title %]</td>
     <td>[% ticket.status.status %]</td>
-    <td>[% ticket.developer.first_name %]</td>
+    <td>
+[% IF ticket.developer.first_name %]
+    [% ticket.developer.first_name %]
+[% ELSE %]
+    Not Assigned
+[% END %]
+</td>
   </tr>
 [% END -%]
 </table>

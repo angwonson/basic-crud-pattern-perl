@@ -83,6 +83,18 @@ sub auto :Private {
     return 1;
 }
 
+=head2 error_noperms
+ 
+Permissions error screen
+ 
+=cut
+ 
+sub error_noperms :Chained('/') :PathPart('error_noperms') :Args(0) {
+    my ($self, $c) = @_;
+ 
+    $c->stash(template => 'error_noperms.tt2');
+}
+
 =head2 end
 
 Attempt to render a view, if needed.

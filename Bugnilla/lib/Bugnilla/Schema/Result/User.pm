@@ -166,5 +166,19 @@ __PACKAGE__->add_columns(
     },
 );
 
+=head2 has_role
+ 
+Check if a user has the specified role
+ 
+=cut
+ 
+use Perl6::Junction qw/any/;
+sub has_role {
+    my ($self, $role) = @_;
+ 
+    # Does this user posses the required role?
+    return any(map { $_->role } $self->roles) eq $role;
+}
+
 __PACKAGE__->meta->make_immutable;
 1;

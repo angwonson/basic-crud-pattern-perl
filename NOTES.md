@@ -60,3 +60,8 @@ $ CATALYST_DEBUG=0 BUGNILLA_DSN="dbi:SQLite:bugnillaTEST.db" prove -vwl t/live_0
 # BUGNILLA_DSN isn't required either but it allows us to run unit tests on a copy of the database, JIC
 # you need to copy bugnilla.db to bugnillaTEST.db if there have been schema changes
 $ cp bugnilla.db bugnillaTEST.db
+
+# Perl doesn't allow dash in subroutine names. So for example /about-us woul dneed to have :Path('/about-us') while the sub is called aboutus()
+
+# using https://purecss.io since I can't use Material or anything else that requires Javascript.
+# techically the Pure examples use some JS, but it seems to be ok so far without it

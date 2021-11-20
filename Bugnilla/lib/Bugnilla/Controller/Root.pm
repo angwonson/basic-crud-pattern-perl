@@ -31,8 +31,7 @@ The root page (/)
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
-    # Hello World
-    $c->response->body( $c->welcome_message );
+    $c->stash(template => 'home_page.tt2');
 }
 
 =head2 default
@@ -93,6 +92,31 @@ sub error_noperms :Chained('/') :PathPart('error_noperms') :Args(0) {
     my ($self, $c) = @_;
  
     $c->stash(template => 'error_noperms.tt2');
+}
+
+=head2 contact
+
+The contact page (/contact)
+
+=cut
+
+sub contact :Path('/contact') :Args(0) {
+    my ( $self, $c ) = @_;
+
+    $c->stash(template => 'contact.tt2');
+}
+
+=head2 about-us
+
+The about-us page (/about-us)
+
+=cut
+
+sub aboutus :Path('/about-us') :Args(0) {
+#sub aaboutus :PathPart('/about-us') :Args(0) {
+    my ( $self, $c ) = @_;
+
+    $c->stash(template => 'about-us.tt2');
 }
 
 =head2 end

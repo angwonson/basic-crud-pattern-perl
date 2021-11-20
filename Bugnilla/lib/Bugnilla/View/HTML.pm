@@ -4,8 +4,11 @@ use namespace::autoclean;
 
 extends 'Catalyst::View::TT';
 
+# enable DEBUG to debug TT templates
+# DEBUG options are: 'undef', 'all', 'service', 'context', 'parser' and 'provider'
 __PACKAGE__->config(
 #    TEMPLATE_EXTENSION => '.tt2',
+#    DEBUG              => 'undef',
 
     # Set the location for TT files
     INCLUDE_PATH => [

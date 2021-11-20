@@ -64,7 +64,10 @@ sub auto :Private {
     #   if ($c->action eq $c->controller('Login')->action_for('index'))
     # to only allow unauthenticated access to the 'index' action we
     # added above.
-    if ($c->controller eq $c->controller('Login')) {
+    #
+    # allow anonymous to index, contact, about-us which are all in Root controller
+    #
+    if ($c->controller eq $c->controller('Login') || $c->controller eq $c->controller('Root')) {
         return 1;
     }
  

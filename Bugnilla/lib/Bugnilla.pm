@@ -62,7 +62,7 @@ __PACKAGE__->config(
     'View::HTML' => {
         #Set the location for TT files
         INCLUDE_PATH => [
-            __PACKAGE__->path_to( 'root', 'src' ),
+            __PACKAGE__->path_to( 'root', 'templates' ),
         ],
     },
 );

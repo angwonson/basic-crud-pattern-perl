@@ -7,16 +7,17 @@ extends 'Catalyst::View::TT';
 # enable DEBUG to debug TT templates
 # DEBUG options are: 'undef', 'all', 'service', 'context', 'parser' and 'provider'
 __PACKAGE__->config(
-#    TEMPLATE_EXTENSION => '.tt2',
-#    DEBUG              => 'undef',
+    # TEMPLATE_EXTENSION => '.tt2',
+    # DEBUG              => 'undef',
 
-    # Set the location for TT files
-    INCLUDE_PATH => [
-            Bugnilla->path_to( 'root', 'src' ),
-        ],
+    # Set the location for TT files - this is already set in Bugnilla.pm, so this could be an override if needed. Leaving it commented out for now.
+    # INCLUDE_PATH => [
+    #        Bugnilla->path_to( 'root', 'templates' ),
+    #    ],
+
     # Set to 1 for detailed timer stats in your HTML as comments
     TIMER              => 0,
-    # This is your wrapper template located in the 'root/src'
+    # This is your wrapper template located in the 'root/templates'
     WRAPPER => 'wrapper.tt2',
 );
 

@@ -176,11 +176,12 @@ sub delete :Chained('get_ticket_object') :PathPart('delete') :Args(0) {
     $c->stash->{ticket_object}->delete;
  
     # Set a status message to be displayed at the top of the view
-    $c->stash->{status_msg} = "Ticket deleted.";
+    $c->flash->{status_msg} = "Ticket deleted.";
  
     # Forward to the list action/method in this controller
     #$c->forward('list');
-    $c->response->redirect($c->uri_for($self->action_for('list'), {status_msg => "Ticket deleted."}));
+    #$c->response->redirect($c->uri_for($self->action_for('list'), {status_msg => "Ticket deleted."}));
+    $c->response->redirect($c->uri_for($self->action_for('list')));
 }
 
 =head2 list_recent

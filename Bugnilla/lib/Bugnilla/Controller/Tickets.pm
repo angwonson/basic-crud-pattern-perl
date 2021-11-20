@@ -55,7 +55,6 @@ Create a ticket with the supplied title, status_id (default should be "New", and
 
 =cut
  
-#sub url_create :Chained('/') :PathPart('tickets/url_create') :Args(3) {
 sub url_create :Chained('base') :PathPart('url_create') :Args(3) {
     # In addition to self & context, get the title, status_id, &
     # developer_id args from the URL.  Note that Catalyst automatically
@@ -63,26 +62,28 @@ sub url_create :Chained('base') :PathPart('url_create') :Args(3) {
     # into @_.  The args are separated  by the '/' char on the URL.
     my ($self, $c, $title, $status_id, $developer_id) = @_;
 
-    # Call create() on the ticket model object. Pass the table
-    # columns/field values we want to set as hash values
-    my $ticket = $c->model('DB::Ticket')->create({
-            title  => $title
-            , status_id => $status_id
-            , developer_id => $developer_id
-        });
+    # Check the user's roles
+    $c->log->debug('*** URL CREATE CHECK AUTH ***');
+    if ($c->check_user_roles('admin') || $c->check_user_roles('developer')) {
+        # Call create() on the ticket model object. Pass the table
+        # columns/field values we want to set as hash values
+        my $ticket = $c->model('DB::Ticket')->create({
+                title  => $title
+                , status_id => $status_id
+                , developer_id => $developer_id
+            });
 
-    # Add a record to the join table for this ticket, mapping to
-    # appropriate author
-    #$ticket->add_to_ticket_authors({developer_id => $developer_id});
-    # Note: Above is a shortcut for this:
-    # $ticket->create_related('ticket_authors', {developer_id => $developer_id});
+        # Assign the Ticket object to the stash for display and set template
+        $c->stash(ticket     => $ticket,
+                  template => 'tickets/create_done.tt2');
 
-    # Assign the Ticket object to the stash for display and set template
-    $c->stash(ticket     => $ticket,
-              template => 'tickets/create_done.tt2');
+    } else {
+        # Provide very simple feedback to the user.
+        $c->response->body('Unauthorized!');
+    }
 
     # Disable caching for this page
-    $c->response->header('Cache-Control' => 'no-cache');
+#    $c->response->header('Cache-Control' => 'no-cache');
 }
 
 =head2 base
@@ -175,8 +176,16 @@ Delete a ticket
 sub delete :Chained('get_ticket_object') :PathPart('delete') :Args(0) {
     my ($self, $c) = @_;
  
+    # Check permissions
+    # https://metacpan.org/pod/Catalyst::Authentication::User#get_object(-)
+    # notice get_object() belongs to User but can't be seen in the code. Since it inherits from Catalyst::Authentication::User
+    # don't get confused that this is different than get_ticket_object() or 'sub object' from the tutorial, which I changed because it was too generic
+    $c->detach('/error_noperms')
+        unless $c->stash->{ticket_object}->delete_allowed_by($c->user->get_object);
+ 
     # Saved the PK id for status_msg below
     my $ticket_id = $c->stash->{ticket_object}->id;
+
     $c->log->debug("*** INSIDE DELETE METHOD for obj id=$ticket_id ***");
 
     # Use the ticket object saved by 'get_ticket_object' and delete it

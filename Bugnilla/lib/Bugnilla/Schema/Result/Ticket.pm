@@ -169,5 +169,17 @@ __PACKAGE__->add_columns(
     { data_type => 'timestamp', set_on_create => 1, set_on_update => 1 },
 );
 
+=head2 delete_allowed_by
+ 
+Can the specified user delete the current ticket?
+ 
+=cut
+ 
+sub delete_allowed_by {
+    my ($self, $user) = @_;
+ 
+    # Only allow delete if user has 'admin' role
+    return $user->has_role('admin');
+}
 __PACKAGE__->meta->make_immutable;
 1;

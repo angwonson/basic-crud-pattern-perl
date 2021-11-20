@@ -22,10 +22,14 @@ requires 'Config::General'; # This should reflect the config file format you've 
 # custom plugins from Bugnilla.pm
 requires 'Catalyst::Plugin::StackTrace';
 requires 'Catalyst::Plugin::Authentication';
+requires 'Catalyst::Plugin::Authorization::Roles';
 requires 'Catalyst::Plugin::Session';
 requires 'Catalyst::Plugin::Session::Store::File';
 requires 'Catalyst::Plugin::Session::State::Cookie';
 requires 'Catalyst::Plugin::StatusMessage';
+
+# more custo, these are in the code, not catalyst plugins
+requires 'Perl6::Junction';
 
 test_requires 'Test::More' => '0.88';
 catalyst;

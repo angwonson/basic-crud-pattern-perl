@@ -70,3 +70,8 @@ $ cp bugnilla.db bugnillaTEST.db
 [% # This is a comment. -%]
 # what the dashdoes is tell TT to remove the newline character.
 # this helps with comments and other situations where you don't want the extra whitespace
+
+# Delete button on list page shows up for ordinary users. This is intentional.
+# It is trivial to hide it but I wanted to show that if you click on it when you are not in the admin group
+#  you will get 'Permission Denied'
+# in production we would hide this if you don't have permission

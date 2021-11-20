@@ -7,6 +7,7 @@
     <title>[% template.title or site.title or "Bugnilla" %]</title>
     <link rel="stylesheet" href="[% c.uri_for('/static/css/pure-min.css') %]" />
     <link rel="stylesheet" href="[% c.uri_for('/static/css/styles_sidemenu.css') %]" />
+    <link rel="stylesheet" href="[% c.uri_for('/static/css/main.css') %]" />
 </head>
 <body>
 
@@ -28,6 +29,8 @@
                 <li class="pure-menu-item [% IF c.req.path == 'logout' %] menu-item-divided pure-menu-selected [% END %]"><a href="[% c.uri_for('/logout') %]" class="pure-menu-link">Logout</a></li>
                 <li class="pure-menu-item [% IF c.req.path == 'contact' %] menu-item-divided pure-menu-selected [% END %]"><a href="[% c.uri_for('/contact') %]" class="pure-menu-link">Contact</a></li>
                 <li class="pure-menu-item [% IF c.req.path == 'about-us' %] menu-item-divided pure-menu-selected [% END %]"><a href="[% c.uri_for('/about-us') %]" class="pure-menu-link">About</a></li>
+                <li class="pure-menu-item [% IF c.req.path == 'admin' %] menu-item-divided pure-menu-selected [% END %]"><a href="[% c.uri_for('/admin') %]" class="pure-menu-link">Admin</a></li>
+                <li class="pure-menu-item [% IF c.req.path == 'brokenlink' %] menu-item-divided pure-menu-selected [% END %]"><a href="[% c.uri_for('/brokenlink') %]" class="pure-menu-link">Broken/404</a></li>
             </ul>
         </div>
     </div>

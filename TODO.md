@@ -1,4 +1,5 @@
-# replace developer table and relations with auth users
+# replace developer table and relations with auth users, update schem and db
+#
 # FormFu / FormHandler
 # fix error message on login screen. Should not complain about missing u/p when you first land on the page
 #
@@ -12,6 +13,7 @@
 #
 # disable authentication option
 # allow form to submit without status or developer (default status is New and default developer should be undefined)
+# allow form to submit without being logged in - add created_by column and make 'anonymous' the default
 
 ## LOWER PRIORITY
 # navbar highlighting could be reduced to avoid repeating the same if statement in wrapper.tt2:

@@ -14,8 +14,11 @@
 [% # Output information about the record that was added.  First title.   -%]
 <p>Added ticket '[% ticket.title %]'
 
-[% # Then, output the last name of the first author -%]
-<!-- by '[% ticket.authors.first_name %]' -->
+[% # Then, output the first name of the assigned developer -%]
+ assigned to '[% ticket.developer.first_name %]'
+
+[% # Then, output the status -%]
+ with status '[% ticket.status.status %]'.
 
 [% # Provide a link back to the list page.  'c.uri_for' builds -%]
 [% # a full URI; e.g., 'http://localhost:3000/tickets/list'      -%]

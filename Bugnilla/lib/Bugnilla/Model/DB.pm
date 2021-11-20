@@ -3,11 +3,13 @@ package Bugnilla::Model::DB;
 use strict;
 use base 'Catalyst::Model::DBIC::Schema';
 
+# allow db switching for unit tests and dev vs prod via $ENV{MYAPP_DSN}
+my $dsn = $ENV{BUGNILLA_DSN} ||= 'dbi:SQLite:bugnilla.db';
 __PACKAGE__->config(
     schema_class => 'Bugnilla::Schema',
     
     connect_info => {
-        dsn => 'dbi:SQLite:bugnilla.db',
+        dsn => $dsn,
         user => '',
         password => '',
         on_connect_do => q{PRAGMA foreign_keys = ON},

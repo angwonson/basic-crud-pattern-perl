@@ -29,3 +29,6 @@ Here is how to export configs from Bugnilla.pm to be used instead in Bugnilla.co
 Soem examples would be database password, Auth configs, etc
 $ CATALYST_DEBUG=0 perl -Ilib -e 'use Bugnilla; use Config::General;
 Config::General->new->save_file("myapp.conf", Bugnilla->config);'
+
+To convert passwords from plain text to hashed:
+$ DBIC_TRACE=1 perl -Ilib set_hashed_passwords.pl

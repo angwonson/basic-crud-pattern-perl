@@ -14,9 +14,12 @@ Create the Schema in Catalyst (again this has already been done so just document
 Update the Schema in Catalyst:
 ./update_schema_from_db.sh
 
+Start the server:
+NOTE: Add the -r switch if you want debug mode, or leave it out if you want multiple users to be able to use the site
+$ script/bugnilla_server.pl -r
+
 TEST from cli:
 script/bugnilla_test.pl "/tickets/list" | lynx -stdin
-
 
 enable DBIC debugging in catalyst server:
 DBIC_TRACE=1 script/bugnilla_server.pl -r

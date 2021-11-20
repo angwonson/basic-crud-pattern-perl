@@ -33,7 +33,7 @@ Fetch all ticket objects and pass to tickets/list.tt2 in stash to be displayed
  
 =cut
  
-sub list :Local {
+sub list :Chained('base') :PathPart('list') :Args(0) {
     # Retrieve the usual Perl OO '$self' for this object. $c is the Catalyst
     # 'Context' that's used to 'glue together' the various components
     # that make up the application
@@ -99,6 +99,9 @@ sub base :Chained('/') :PathPart('tickets') :CaptureArgs(0) {
  
     # Print a message to the debug log
     $c->log->debug('*** INSIDE BASE METHOD ***');
+
+    # Load status messages (Catalyst::Plugin::StatusMessage)
+    $c->load_status_msgs;
 }
 
 =head2 create_form
@@ -172,16 +175,23 @@ Delete a ticket
 sub delete :Chained('get_ticket_object') :PathPart('delete') :Args(0) {
     my ($self, $c) = @_;
  
+    # Saved the PK id for status_msg below
+    my $ticket_id = $c->stash->{ticket_object}->id;
+    $c->log->debug("*** INSIDE DELETE METHOD for obj id=$ticket_id ***");
+
     # Use the ticket object saved by 'get_ticket_object' and delete it
     $c->stash->{ticket_object}->delete;
  
     # Set a status message to be displayed at the top of the view
-    $c->flash->{status_msg} = "Ticket deleted.";
+    #$c->flash->{status_msg} = "Ticket deleted.";
  
     # Forward to the list action/method in this controller
     #$c->forward('list');
     #$c->response->redirect($c->uri_for($self->action_for('list'), {status_msg => "Ticket deleted."}));
-    $c->response->redirect($c->uri_for($self->action_for('list')));
+    #$c->response->redirect($c->uri_for($self->action_for('list'))); # flash method
+    # Redirect the user back to the list page using StatusMessage instead - 
+    # set_status_msg() and set_error_msg() are from Catalyst::Plugin::StatusMessage
+    $c->response->redirect($c->uri_for($self->action_for('list'), {mid => $c->set_status_msg("Deleted ticket $ticket_id")}));
 }
 
 =head2 list_recent

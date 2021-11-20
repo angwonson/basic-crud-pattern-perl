@@ -65,3 +65,8 @@ $ cp bugnilla.db bugnillaTEST.db
 
 # using https://purecss.io since I can't use Material or anything else that requires Javascript.
 # techically the Pure examples use some JS, but it seems to be ok so far without it
+
+# TT2 has some syntactic sugar:
+[% # This is a comment. -%]
+# what the dashdoes is tell TT to remove the newline character.
+# this helps with comments and other situations where you don't want the extra whitespace

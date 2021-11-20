@@ -13,3 +13,6 @@
 # REST API
 # auto crud
 # replace developer table and relations with auth users
+# navbar highlighting could be reduced to avoid repeating the same if statement in wrapper.tt2:
+[% IF c.req.path == 'logout' %] menu-item-divided pure-menu-selected [% END %]">
+

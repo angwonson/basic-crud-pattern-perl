@@ -64,7 +64,8 @@ $ cp bugnilla.db bugnillaTEST.db
 # Perl doesn't allow dash in subroutine names. So for example /about-us woul dneed to have :Path('/about-us') while the sub is called aboutus()
 
 # using https://purecss.io since I can't use Material or anything else that requires Javascript.
-# techically the Pure examples use some JS, but it seems to be ok so far without it
+# techically the Pure examples use some JS, but it seems to be ok so far without it, except:
+# the design is responsive, so if you make your window small it will switch to burger vs left bar, and the burger doesn't work w/o the js
 
 # TT2 has some syntactic sugar:
 [% # This is a comment. -%]

@@ -25,13 +25,28 @@
             <ul class="pure-menu-list">
                 <li class="pure-menu-item [% IF c.req.path == 'tickets/list' %] menu-item-divided pure-menu-selected [% END %]"><a href="[% c.uri_for('/tickets/list') %]" class="pure-menu-link">List</a></li>
                 <li class="pure-menu-item [% IF c.req.path == 'tickets/create_form' %] menu-item-divided pure-menu-selected [% END %]"><a href="[% c.uri_for('/tickets/create_form') %]" class="pure-menu-link">Create</a></li>
-                <li class="pure-menu-item [% IF c.req.path == 'login' %] menu-item-divided pure-menu-selected [% END %]"><a href="[% c.uri_for('/login') %]" class="pure-menu-link">Login</a></li>
+            [% IF c.user -%]
                 <li class="pure-menu-item [% IF c.req.path == 'logout' %] menu-item-divided pure-menu-selected [% END %]"><a href="[% c.uri_for('/logout') %]" class="pure-menu-link">Logout</a></li>
+            [% ELSE -%]
+                <li class="pure-menu-item [% IF c.req.path == 'login' %] menu-item-divided pure-menu-selected [% END %]"><a href="[% c.uri_for('/login') %]" class="pure-menu-link">Login</a></li>
+            [% END -%]
                 <li class="pure-menu-item [% IF c.req.path == 'contact' %] menu-item-divided pure-menu-selected [% END %]"><a href="[% c.uri_for('/contact') %]" class="pure-menu-link">Contact</a></li>
                 <li class="pure-menu-item [% IF c.req.path == 'about-us' %] menu-item-divided pure-menu-selected [% END %]"><a href="[% c.uri_for('/about-us') %]" class="pure-menu-link">About</a></li>
                 <li class="pure-menu-item [% IF c.req.path == 'admin' %] menu-item-divided pure-menu-selected [% END %]"><a href="[% c.uri_for('/admin') %]" class="pure-menu-link">Admin</a></li>
                 <li class="pure-menu-item [% IF c.req.path == 'brokenlink' %] menu-item-divided pure-menu-selected [% END %]"><a href="[% c.uri_for('/brokenlink') %]" class="pure-menu-link">Broken/404</a></li>
             </ul>
+
+            [% IF c.user -%]
+            </br/>
+            <p>&nbsp;My Roles ([% c.user.username %]):</p></p>
+            <ul>
+                [% # Dump list of roles -%]
+                [% FOR role = c.user.roles %]<li>[% role %]</li>[% END %]
+                [% # All users are "users" - there isn't actually a role in the DB -%]
+                <li>User</li>
+            </ul>
+            [% END -%]
+
         </div>
     </div>
 

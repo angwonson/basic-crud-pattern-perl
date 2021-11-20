@@ -26,11 +26,13 @@ extends 'DBIx::Class::Core';
 
 =item * L<DBIx::Class::TimeStamp>
 
+=item * L<DBIx::Class::PassphraseColumn>
+
 =back
 
 =cut
 
-__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp");
+__PACKAGE__->load_components("InflateColumn::DateTime", "TimeStamp", "PassphraseColumn");
 
 =head1 TABLE: C<users>
 
@@ -135,8 +137,8 @@ Composing rels: L</user_roles> -> role
 __PACKAGE__->many_to_many("roles", "user_roles", "role");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-19 15:09:52
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:bWNznuTdLTgsjMLulzIFcw
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-19 16:07:03
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:4omV56WwomN/+1YWH1HXEA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
@@ -147,7 +149,22 @@ __PACKAGE__->many_to_many("roles", "user_roles", "role");
 #     2) Name of has_many() relationship this many_to_many() is shortcut for
 #     3) Name of belongs_to() relationship in model class of has_many() above
 #   You must already have the has_many() defined to use a many_to_many().
-__PACKAGE__->many_to_many(roles => 'user_roles', 'role');
+#__PACKAGE__->many_to_many(roles => 'user_roles', 'role');
+# NOTE This causes compaints when updating the DBIC due to PassphraseColumn trying to create methods with the same name as 'roles'
+
+# Have the 'password' column use a SHA-1 hash and 20-byte salt
+# with RFC 2307 encoding; Generate the 'check_password" method
+__PACKAGE__->add_columns(
+    'password' => {
+        passphrase       => 'rfc2307',
+        passphrase_class => 'SaltedDigest',
+        passphrase_args  => {
+            algorithm   => 'SHA-1',
+            salt_random => 20,
+        },
+        passphrase_check_method => 'check_password',
+    },
+);
 
 __PACKAGE__->meta->make_immutable;
 1;

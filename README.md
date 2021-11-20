@@ -25,4 +25,6 @@ http://localhost:3000/
 # test03 is plain user
 # all 3 have the same password 'mypass'
 
-# admin can delete, developer can edit, user can only submit tickets
+# admin can delete, admin the user roles
+# developer can edit, assign
+# plain user can create tickets and comment on them (no role in roles DB - all users are "user" role)

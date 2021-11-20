@@ -12,8 +12,6 @@
 #
 # disable authentication option
 # allow form to submit without status or developer (default status is New and default developer should be undefined)
-#
-# pretty up the 404 page
 
 ## LOWER PRIORITY
 # navbar highlighting could be reduced to avoid repeating the same if statement in wrapper.tt2:
@@ -21,3 +19,4 @@
 # REST API
 # auto crud
 # user/role management for admins
+# Add git hooks to prevent untracked files

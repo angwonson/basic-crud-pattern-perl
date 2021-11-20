@@ -83,7 +83,7 @@ $ua1->get_ok("http://localhost/tickets/url_create/TestTitle/1/1",
     "'test01' formless create");
 $ua1->title_is("Ticket Created", "Ticket created title");
 $ua1->content_contains("Added ticket 'TestTitle'", "Check title added OK");
-$ua1->content_contains("assigned to 'Alice'", "Check developer added OK");
+$ua1->content_contains("assigned to 'Alice'", "Check user assigned to ticket OK");
 $ua1->content_contains("with status 'New'.", "Check status added OK");
 # Try a regular expression to combine the previous 3 checks & account for whitespace
 $ua1->content_like(qr/Added ticket 'TestTitle'\s+assigned to 'Alice'\s+with status 'New'./,

@@ -76,3 +76,7 @@ $ cp bugnilla.db bugnillaTEST.db
 # It is trivial to hide it but I wanted to show that if you click on it when you are not in the admin group
 #  you will get 'Permission Denied'
 # in production we would hide this if you don't have permission
+
+# Do not allow users to be deleted, this will break the relationship with tickets assigned to that user
+# Instead we can just make them inactive:
+# UPDATE user SET active = 0 WHERE user = 2;

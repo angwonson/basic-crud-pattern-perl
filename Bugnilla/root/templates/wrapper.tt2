@@ -1,43 +1,60 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" [%#
-    %]"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!doctype html>
+<html lang="en">
 <head>
-<title>[% template.title or "My Catalyst App!" %]</title>
-<link rel="stylesheet" href="[% c.uri_for('/static/css/main.css') %]" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A ticket tracking system.">
+    <title>[% template.title or site.title or "Bugnilla" %]</title>
+    <link rel="stylesheet" href="[% c.uri_for('/static/css/pure-min.css') %]" />
+    <link rel="stylesheet" href="[% c.uri_for('/static/css/styles_sidemenu.css') %]" />
 </head>
- 
 <body>
-<div id="outer">
-<div id="header">
-    [%# Your logo could go here -%]
-    <img src="[% c.uri_for('/static/images/btn_88x31_powered.png') %]" />
-    [%# Insert the page title -%]
-    <h1>[% template.title or site.title %]</h1>
-</div>
- 
-<div id="bodyblock">
-<div id="menu">
-    Navigation:
-    <ul>
-        <li><a href="[% c.uri_for('/')
-            %]" title="Catalyst Welcome Page">Welcome</a></li>
-        <li><a href="[% c.uri_for('/tickets/list') %]">List Tickets</a></li>
-        <li><a href="[% c.uri_for('/tickets/create_form') %]">Create A Ticket</a></li>
-    </ul>
-</div><!-- end menu -->
- 
-<div id="content">
-    [%# Status and error messages %]
-    <span class="message">[% status_msg %]</span>
-    <span class="error">[% error_msg %]</span>
+
+<div id="layout">
+    <!-- Menu toggle -->
+    <a href="#menu" id="menuLink" class="menu-link">
+        <!-- Hamburger icon -->
+        <span></span>
+    </a>
+
+    <div id="menu">
+        <div class="pure-menu">
+            <a class="pure-menu-heading" href="[% c.uri_for('/') %]">Bugnilla</a>
+
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item menu-item-divided pure-menu-selected"><a href="[% c.uri_for('/tickets/list') %]" class="pure-menu-link">List</a></li>
+                <li class="pure-menu-item"><a href="[% c.uri_for('/tickets/create_form') %]" class="pure-menu-link">Create</a></li>
+                <li class="pure-menu-item"><a href="[% c.uri_for('/login') %]" class="pure-menu-link">Login</a></li>
+                <li class="pure-menu-item"><a href="[% c.uri_for('/logout') %]" class="pure-menu-link">Logout</a></li>
+                <li class="pure-menu-item"><a href="[% c.uri_for('/contact') %]" class="pure-menu-link">Contact</a></li>
+                <li class="pure-menu-item"><a href="[% c.uri_for('/about-us') %]" class="pure-menu-link">About</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="main">
+        <div class="header">
+
+            <h1>[% template.title or site.title %]</h1>
+
+            [%# Status and error messages %]
+            <span class="message">[% status_msg %]</span>
+            <span class="error">[% error_msg %]</span>
+
+        </div>
+
+        <div class="content">
+
+
+
     [%# This is where TT will stick all of your template's contents. -%]
     [% content %]
-</div><!-- end content -->
-</div><!-- end bodyblock -->
- 
-<div id="footer">Copyright (c) @angwonson</div>
-</div><!-- end outer -->
- 
+
+
+
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

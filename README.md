@@ -18,3 +18,11 @@ $ script/bugnilla_server.pl
 
 Web server is now up and running at the following url:
 http://localhost:3000/
+
+# Sample users:
+# test01 is admin
+# test02 is developer
+# test03 is plain user
+# all 3 have the same password 'mypass'
+
+# admin can delete, developer can edit, user can only submit tickets

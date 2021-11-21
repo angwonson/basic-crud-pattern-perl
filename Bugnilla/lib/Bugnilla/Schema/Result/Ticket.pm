@@ -181,5 +181,19 @@ sub delete_allowed_by {
     # Only allow delete if user has 'Admin' role
     return $user->has_role('Admin');
 }
+
+=head2 edit_allowed_by
+ 
+Can the specified user edit the current ticket?
+ 
+=cut
+ 
+sub edit_allowed_by {
+    my ($self, $user) = @_;
+ 
+    # Only allow edit if user has 'Admin' or 'Developer' role
+    return $user->has_role('Admin') || $user->has_role('Developer');
+}
+
 __PACKAGE__->meta->make_immutable;
 1;

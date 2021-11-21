@@ -53,7 +53,7 @@ __PACKAGE__->table("ticket");
   data_type: 'text'
   is_nullable: 0
 
-=head2 developer_id
+=head2 user_id
 
   data_type: 'integer'
   is_foreign_key: 1
@@ -83,7 +83,7 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "title",
   { data_type => "text", is_nullable => 0 },
-  "developer_id",
+  "user_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "status_id",
   {
@@ -112,26 +112,6 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
-=head2 developer
-
-Type: belongs_to
-
-Related object: L<Bugnilla::Schema::Result::Developer>
-
-=cut
-
-__PACKAGE__->belongs_to(
-  "developer",
-  "Bugnilla::Schema::Result::Developer",
-  { id => "developer_id" },
-  {
-    is_deferrable => 0,
-    join_type     => "LEFT",
-    on_delete     => "NO ACTION",
-    on_update     => "NO ACTION",
-  },
-);
-
 =head2 status
 
 Type: belongs_to
@@ -152,9 +132,29 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 user
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-19 16:07:03
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:isBvYnPbls15vqFw7Ktthw
+Type: belongs_to
+
+Related object: L<Bugnilla::Schema::Result::User>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "user",
+  "Bugnilla::Schema::Result::User",
+  { id => "user_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-20 15:57:52
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:whgCglT6YEgsIsEC1rfPVg
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

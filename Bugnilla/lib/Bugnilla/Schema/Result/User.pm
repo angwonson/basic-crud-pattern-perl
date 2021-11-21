@@ -111,6 +111,21 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
+=head2 tickets
+
+Type: has_many
+
+Related object: L<Bugnilla::Schema::Result::Ticket>
+
+=cut
+
+__PACKAGE__->has_many(
+  "tickets",
+  "Bugnilla::Schema::Result::Ticket",
+  { "foreign.user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 user_roles
 
 Type: has_many
@@ -137,8 +152,8 @@ Composing rels: L</user_roles> -> role
 __PACKAGE__->many_to_many("roles", "user_roles", "role");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-19 16:07:03
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:4omV56WwomN/+1YWH1HXEA
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-20 15:57:52
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:uht6u0wp11V2PYfjYbPM3w
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

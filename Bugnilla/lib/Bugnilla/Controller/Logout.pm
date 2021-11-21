@@ -30,7 +30,7 @@ sub index :Path :Args(0) {
     $c->logout;
  
     # Send the user to the starting point
-    $c->response->redirect($c->uri_for('/'));
+    $c->response->redirect($c->uri_for('/login'));
 }
 
 

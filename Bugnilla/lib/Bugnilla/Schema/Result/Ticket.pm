@@ -178,8 +178,8 @@ Can the specified user delete the current ticket?
 sub delete_allowed_by {
     my ($self, $user) = @_;
  
-    # Only allow delete if user has 'admin' role
-    return $user->has_role('admin');
+    # Only allow delete if user has 'Admin' role
+    return $user->has_role('Admin');
 }
 __PACKAGE__->meta->make_immutable;
 1;

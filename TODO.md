@@ -13,7 +13,7 @@
 - [ ] filter by status
 - [ ] padding and maybe some color in the table
 #### Anonymous Features
-- [ ] disable authentication option
+- [ ] disable authentication option - maybe config flag to let the system run without logins at all?
 - [ ] allow form to submit without status or developer (default status is New and default developer should be undefined)
 - [ ] allow form to submit without being logged in - [ ] add created_by column and make 'anonymous' the default
 

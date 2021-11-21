@@ -267,6 +267,76 @@ sub create :Chained('base') :PathPart('create') :Args(0) :FormConfig {
     $c->stash(template => 'tickets/formfu_create.tt2');
 }
 
+=head2 edit
+ 
+Use HTML::FormFu to update an existing ticket
+ 
+=cut
+ 
+#sub edit :Chained('object') :PathPart('edit') :Args(0)
+sub edit :Chained('get_ticket_object') :PathPart('edit') :Args(0)
+        :FormConfig('tickets/create.conf') {
+    my ($self, $c) = @_;
+ 
+    # Get the specified ticket already saved by the 'ticket_object' method
+    my $ticket = $c->stash->{ticket_object};
+ 
+    # Make sure we were able to get a ticket
+    unless ($ticket) {
+        # Set an error message for the user & return to tickets list
+        $c->response->redirect($c->uri_for($self->action_for('list'),
+            {mid => $c->set_error_msg("Invalid ticket -- Cannot edit")}));
+        $c->detach;
+    }
+ 
+    # Get the form that the :FormConfig attribute saved in the stash
+    my $form = $c->stash->{form};
+ 
+    # Check if the form has been submitted (vs. displaying the initial
+    # form) and if the data passed validation.  "submitted_and_valid"
+    # is shorthand for "$form->submitted && !$form->has_errors"
+    if ($form->submitted_and_valid) {
+        # Save the form data for the ticket
+        $form->model->update($ticket);
+        # Set a status message for the user
+        # Set a status message for the user & return to tickets list
+        $c->response->redirect($c->uri_for($self->action_for('list'),
+            {mid => $c->set_status_msg("Ticket edited: #" . $ticket->id)}));
+        $c->detach;
+    } else {
+        # Get the users from the DB
+        my @user_objs = $c->model("DB::User")->all();
+        # Create an array of arrayrefs where each arrayref is an user
+        my @users;
+        foreach (sort {$a->first_name cmp $b->first_name} @user_objs) {
+            push(@users, [$_->id, $_->first_name]);
+        }
+        # Get the select added by the config file
+        my $select = $form->get_element({type => 'Select', name => 'user_id'});
+        # Add the users to it
+        $select->options(\@users);
+        # Populate the form with existing values from DB
+        $form->model->default_values($ticket);
+
+        # Get the statuses from the DB
+        my @status_objs = $c->model("DB::Status")->all();
+        # Create an array of arrayrefs where each arrayref is an status
+        my @statuses;
+        foreach (sort {$a->status cmp $b->status} @status_objs) {
+            push(@statuses, [$_->id, $_->status]);
+        }
+        # Get the select added by the config file
+        my $select2 = $form->get_element({type => 'Select', name => 'status_id'});
+        # Add the statuses to it
+        $select2->options(\@statuses);
+        # Populate the form with existing values from DB
+        $form->model->default_values($ticket);
+    }
+ 
+    # Set the template
+    $c->stash(template => 'tickets/formfu_create.tt2');
+}
+
 
 =encoding utf8
 

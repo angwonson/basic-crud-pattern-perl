@@ -232,10 +232,19 @@ sub create :Chained('base') :PathPart('create') :Args(0) :FormConfig {
         my $ticket = $c->model('DB::Ticket')->new_result({});
         # Save the form data for the ticket
         $form->model->update($ticket);
-        # Set a status message for the user & return to tickets list
-        $c->response->redirect($c->uri_for($self->action_for('list'),
-            {mid => $c->set_status_msg("Ticket created: #" . $ticket->id)}));
-        $c->detach;
+
+        # a bit of customization here to allow anonymous users to post, but not land on the list page
+        if ($c->user) {
+            # Set a status message for the user & return to tickets list
+            $c->response->redirect($c->uri_for($self->action_for('list'),
+                {mid => $c->set_status_msg("Ticket created: #" . $ticket->id)}));
+            $c->detach;
+        } else {
+            # provide a decent confirmation to the anonymous submitter
+            $c->stash(ticket     => $ticket,
+                      template => 'tickets/create_done.tt2');
+            return 1;
+        }
     } else {
         # Get the users from the DB
         my @user_objs = $c->model("DB::User")->all();
@@ -264,6 +273,7 @@ sub create :Chained('base') :PathPart('create') :Args(0) :FormConfig {
     }
  
     # Set the template
+#    $c->stash(template => 'tickets/formfu_create.tt2') if $c->user;
     $c->stash(template => 'tickets/formfu_create.tt2');
 }
 
@@ -273,11 +283,14 @@ Use HTML::FormFu to update an existing ticket
  
 =cut
  
-#sub edit :Chained('object') :PathPart('edit') :Args(0)
 sub edit :Chained('get_ticket_object') :PathPart('edit') :Args(0)
         :FormConfig('tickets/create.conf') {
     my ($self, $c) = @_;
- 
+
+    $c->log->debug('*** SUB EDIT CHECK PERMISSIONS ***');
+    $c->detach('/error_noperms')
+        unless $c->stash->{ticket_object}->edit_allowed_by($c->user->get_object);
+
     # Get the specified ticket already saved by the 'ticket_object' method
     my $ticket = $c->stash->{ticket_object};
  

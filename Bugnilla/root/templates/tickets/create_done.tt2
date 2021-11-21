@@ -22,7 +22,12 @@
 
 [% # Provide a link back to the list page.  'c.uri_for' builds -%]
 [% # a full URI; e.g., 'http://localhost:3000/tickets/list'      -%]
+[% IF c.user%]
 <p><a href="[% c.uri_for('/tickets/list') %]">Return to list</a></p>
+[% END %]
+
+[% # this is helpful for anonymous users %]
+<p><a href="[% c.uri_for('/tickets/create') %]">Create Another Ticket</a></p>
 
 [% # Try out the TT Dumper (for development only!) -%]
 <pre>

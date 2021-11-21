@@ -67,7 +67,7 @@ sub auto :Private {
     #
     # allow anonymous to index, contact, about-us which are all in Root controller
     #
-    if ($c->controller eq $c->controller('Login') || $c->controller eq $c->controller('Root')) {
+    if ($c->controller eq $c->controller('Login') || $c->controller eq $c->controller('Root') || $c->action eq $c->controller('Tickets')->action_for('create')   ) {
         return 1;
     }
  

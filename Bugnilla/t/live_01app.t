@@ -56,7 +56,7 @@ $_->content_contains("You need to log in to use this application",
     "Check we are NOT logged in") for $ua1, $ua2;
 
 # anonymous users should see the create link on the left nav
-$_->content_contains("/tickets/create_form\" class=\"pure-menu-link\">Create</a>",
+$_->content_contains("/tickets/create\" class=\"pure-menu-link\">Create</a>",
     "All users should have a create link") for $ua1, $ua2, $ua3;
 
 # Log back in
@@ -78,7 +78,7 @@ $_->content_contains("Ticket List", "Check for ticket list title") for $ua1, $ua
 # Make sure the appropriate logout buttons are displayed
 $_->content_contains("/logout\" class=\"pure-menu-link\">Logout</a>",
     "All users should have a 'Logout Link'") for $ua1, $ua2, $ua3;
-$_->content_contains("/tickets/create_form\" class=\"pure-menu-link\">Create</a>",
+$_->content_contains("/tickets/create\" class=\"pure-menu-link\">Create</a>",
     "All users should have a create link") for $ua1, $ua2, $ua3;
 
 $ua1->get_ok("http://localhost/tickets/list", "View ticket list as 'test01'");

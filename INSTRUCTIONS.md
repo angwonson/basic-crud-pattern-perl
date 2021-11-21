@@ -1,6 +1,6 @@
-Coding test for backend Perl developers
+# Coding test for backend Perl developers
 
-The Synopsis
+## The Synopsis
 ============
 
 A client has asked you to create a very, very simple ticketing system. In
@@ -18,10 +18,10 @@ see you rush to get the code back to us as soon as possible.
 
 Note that this is a chance to shine and show us your best work.
 
-The Details
+## The Details
 ===========
 
-The client needs:
+#### The client needs:
 
 * To see a list of tickets
 * To filter that list of tickets by ticket status
@@ -32,7 +32,7 @@ The client needs:
 * Assign a developer to a ticket
 * Change the status of a ticket
 
-The client doesn't need:
+#### The client doesn't need:
 
 * Authentication or authorization (all ticket authors/replies are thus
   anonymous)
@@ -50,15 +50,15 @@ silly, but we're keeping the test simple for you). Replies can be posted to a
 ticket, but should not be editable after that.  The original ticket should be
 editable, including changing who it's assigned to and the ticket status.
 
-The client has specifically asked that Javascript not be used.
+#### The client has specifically asked that Javascript not be used.
 
-The list of developers:
+#### The list of developers:
 
 * Alice
 * Bob
 * Charlie
 
-The list of ticket statuses:
+#### The list of ticket statuses:
 
 * New
 * In progress
@@ -71,7 +71,7 @@ use your best judgement if you have any questions about the data, how it should
 be displayed, or other issues with the task.  In other words, it’s all up to
 you.
 
-Deliverables
+## Deliverables
 ============
 
 The basic task will take most developers less than a day to complete. However,
@@ -82,7 +82,7 @@ Instead, we expect that you submit to us code that, while not perfect, is
 nonetheless an example of the quality you feel is appropriate for production
 code.
 
-What to send us
+## What to send us
 ---------------
 
 On or before one week of receiving this, you should return a tarball or zip file
@@ -94,13 +94,13 @@ containing:
 * A README text document explaining how to build and run the project
 * A NOTES text document explaining any decisions about the code which you feel are relevant
 
-What we'll send you
+## What we'll send you
 -------------------
 
 After receiving the project, we'll give the code a full code review.
 Regardless of how you did, we'll send you the results of that review.
 
-The NOTES file
+## The NOTES file
 --------------
 
 We will be using the NOTES file to understand how you make business and
@@ -111,7 +111,7 @@ Between the README and the NOTES and the code, we should be able to build, run
 and assess your project without further clarification from you. The final code
 will should run on a standard Linux system (we're actually using OS X).
 
-What tools do you use?
+## What tools do you use?
 ----------------------
 
 Anything! We want the code to be in Perl and the database to be SQLite, but
@@ -124,5 +124,4 @@ In short, we want you to use any tools you feel comfortable with.  We're
 checking to see if you can code, not whether or not you can use a set of tools
 we have already chosen for you.
 
-Good luck !
-
+### Good luck !

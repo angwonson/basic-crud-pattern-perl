@@ -2,7 +2,8 @@ package Bugnilla::Controller::Tickets;
 use Moose;
 use namespace::autoclean;
 
-BEGIN { extends 'Catalyst::Controller'; }
+#BEGIN { extends 'Catalyst::Controller'; }
+BEGIN { extends 'Catalyst::Controller::HTML::FormFu'; }
 
 =head1 NAME
 
@@ -144,7 +145,7 @@ sub create_form_do :Chained('base') :PathPart('create_form_do') :Args(0) {
               template => 'tickets/create_done.tt2');
 }
 
-=head2 object
+=head2 get_ticket_object
  
 Fetch the specified ticket object based on the ticket ID and store
 it in the stash
@@ -249,6 +250,47 @@ sub list_recent_tcp :Chained('base') :PathPart('list_recent_tcp') :Args(1) {
     $c->stash(template => 'tickets/list.tt2');
 }
 
+=head2 formfu_create
+ 
+Use HTML::FormFu to create a new ticket
+ 
+=cut
+ 
+sub formfu_create :Chained('base') :PathPart('formfu_create') :Args(0) :FormConfig {
+    my ($self, $c) = @_;
+ 
+    # Get the form that the :FormConfig attribute saved in the stash
+    my $form = $c->stash->{form};
+ 
+    # Check if the form has been submitted (vs. displaying the initial
+    # form) and if the data passed validation.  "submitted_and_valid"
+    # is shorthand for "$form->submitted && !$form->has_errors"
+    if ($form->submitted_and_valid) {
+        # Create a new ticket
+        my $ticket = $c->model('DB::Ticket')->new_result({});
+        # Save the form data for the ticket
+        $form->model->update($ticket);
+        # Set a status message for the user & return to tickets list
+        $c->response->redirect($c->uri_for($self->action_for('list'),
+            {mid => $c->set_status_msg("Ticket created")}));
+        $c->detach;
+    } else {
+        # Get the users from the DB
+        my @user_objs = $c->model("DB::User")->all();
+        # Create an array of arrayrefs where each arrayref is an user
+        my @users;
+        foreach (sort {$a->first_name cmp $b->first_name} @user_objs) {
+            push(@users, [$_->id, $_->first_name]);
+        }
+        # Get the select added by the config file
+        my $select = $form->get_element({type => 'Select'});
+        # Add the users to it
+        $select->options(\@users);
+    }
+ 
+    # Set the template
+    $c->stash(template => 'tickets/formfu_create.tt2');
+}
 
 
 =encoding utf8

@@ -27,6 +27,9 @@ requires 'Catalyst::Plugin::Session';
 requires 'Catalyst::Plugin::Session::Store::File';
 requires 'Catalyst::Plugin::Session::State::Cookie';
 requires 'Catalyst::Plugin::StatusMessage';
+requires 'HTML::FormFu';
+requires 'Catalyst::Controller::HTML::FormFu';
+requires 'HTML::FormFu::Model::DBIC';
 
 # more custo, these are in the code, not catalyst plugins
 requires 'Perl6::Junction';

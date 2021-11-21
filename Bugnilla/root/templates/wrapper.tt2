@@ -24,7 +24,7 @@
 
             <ul class="pure-menu-list">
                 <li class="pure-menu-item [% IF c.req.path == 'tickets/list' %] menu-item-divided pure-menu-selected [% END %]"><a href="[% c.uri_for('/tickets/list') %]" class="pure-menu-link">List</a></li>
-                <li class="pure-menu-item [% IF c.req.path == 'tickets/create_form' %] menu-item-divided pure-menu-selected [% END %]"><a href="[% c.uri_for('/tickets/create_form') %]" class="pure-menu-link">Create</a></li>
+                <li class="pure-menu-item [% IF c.req.path == 'tickets/create_form' %] menu-item-divided pure-menu-selected [% END %]"><a href="[% c.uri_for(c.controller.action_for('formfu_create')) %]" class="pure-menu-link">Create</a></li>
             [% IF c.user -%]
                 <li class="pure-menu-item [% IF c.req.path == 'logout' %] menu-item-divided pure-menu-selected [% END %]"><a href="[% c.uri_for('/logout') %]" class="pure-menu-link">Logout</a></li>
             [% ELSE -%]

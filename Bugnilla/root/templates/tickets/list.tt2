@@ -4,6 +4,11 @@
 [% # "chomps" the whitespace/newline at that end of the    -%]
 [% # output (use View Source in browser to see the effect) -%]
  
+<p>
+  New Ticket:
+  <a href="[% c.uri_for(c.controller.action_for('formfu_create')) %]">Create</a>
+</p>
+
 [% # Some basic HTML with a loop to display tickets -%]
 <table>
 <tr><th>ID</th><th>Title</th><th>Status</th><th>User</th><th>Links</th></tr>

@@ -14,8 +14,8 @@
 [% # Output information about the record that was added.  First title.   -%]
 <p>Added ticket '[% ticket.title %]'
 
-[% # Then, output the first name of the assigned developer -%]
- assigned to '[% ticket.developer.first_name %]'
+[% # Then, output the first name of the assigned user -%]
+ assigned to '[% ticket.user.first_name %]'
 
 [% # Then, output the status -%]
  with status '[% ticket.status.status %]'.

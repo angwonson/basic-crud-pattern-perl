@@ -7,6 +7,8 @@
 
 # I would not usually put a database, even SQLite into git, but the instructions say plainly to include a database with some data in it already. I've also included a simple shell script to create the db from the schema file.
 ./init_sqlite_db.sh
+# change passwords in db to hashed SHA1 after the import
+DBIC_TRACE=1 perl -Ilib set_hashed_passwords.pl
 
 # Create the Schema in Catalyst (again this has already been done so just documenting how it was achieved):
 ./init_schema_from_db.sh
@@ -16,7 +18,7 @@
 
 # Start the server:
 # NOTE: Add the -r switch if you want debug mode, or leave it out if you want multiple users to be able to use the site
-$ script/bugnilla_server.pl -r
+script/bugnilla_server.pl -r
 
 # TEST from cli:
 script/bugnilla_test.pl "/tickets/list" | lynx -stdin
@@ -30,11 +32,11 @@ schema/tickets_20211118.sql
 
 # Here is how to export configs from Bugnilla.pm to be used instead in Bugnilla.conf
 # Some examples would be database password, Auth configs, etc
-$ CATALYST_DEBUG=0 perl -Ilib -e 'use Bugnilla; use Config::General;
+CATALYST_DEBUG=0 perl -Ilib -e 'use Bugnilla; use Config::General;
 Config::General->new->save_file("myapp.conf", Bugnilla->config);'
 
 # To convert passwords from plain text to hashed:
-$ DBIC_TRACE=1 perl -Ilib set_hashed_passwords.pl
+DBIC_TRACE=1 perl -Ilib set_hashed_passwords.pl
 
 # Run unit tests:
 prove -wl t
@@ -53,13 +55,13 @@ perl -d script/bugnilla_server.pl
 ## enable DEBUG in View/HTML.pm
 
 # unit tests:
-$ CATALYST_DEBUG=0 perl -w -Ilib t
+CATALYST_DEBUG=0 perl -w -Ilib t
 # or
-$ CATALYST_DEBUG=0 BUGNILLA_DSN="dbi:SQLite:bugnillaTEST.db" prove -vwl t/live_01app.t
+CATALYST_DEBUG=0 BUGNILLA_DSN="dbi:SQLite:bugnillaTEST.db" prove -vwl t/live_01app.t
 # CATALYST_DEBUG=0 isn't necessary but makes it easier to read
 # BUGNILLA_DSN isn't required either but it allows us to run unit tests on a copy of the database, JIC
 # you need to copy bugnilla.db to bugnillaTEST.db if there have been schema changes
-$ cp bugnilla.db bugnillaTEST.db
+cp bugnilla.db bugnillaTEST.db
 
 # Perl doesn't allow dash in subroutine names. So for example /about-us woul dneed to have :Path('/about-us') while the sub is called aboutus()
 

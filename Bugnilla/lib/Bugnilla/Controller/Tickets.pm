@@ -51,26 +51,26 @@ sub list :Chained('base') :PathPart('list') :Args(0) {
 
 =head2 url_create
 
-Create a ticket with the supplied title, status_id (default should be "New", and developer_id can be blank (unassigned)
+Create a ticket with the supplied title, status_id (default should be "New", and user_id can be blank (unassigned)
 
 =cut
  
 sub url_create :Chained('base') :PathPart('url_create') :Args(3) {
     # In addition to self & context, get the title, status_id, &
-    # developer_id args from the URL.  Note that Catalyst automatically
+    # user_id args from the URL.  Note that Catalyst automatically
     # puts extra information after the "/<controller_name>/<action_name/"
     # into @_.  The args are separated  by the '/' char on the URL.
-    my ($self, $c, $title, $status_id, $developer_id) = @_;
+    my ($self, $c, $title, $status_id, $user_id) = @_;
 
     # Check the user's roles
     $c->log->debug('*** URL CREATE CHECK AUTH ***');
-    if ($c->check_user_roles('admin') || $c->check_user_roles('developer')) {
+    if ($c->check_user_roles('Admin') || $c->check_user_roles('Developer')) {
         # Call create() on the ticket model object. Pass the table
         # columns/field values we want to set as hash values
         my $ticket = $c->model('DB::Ticket')->create({
                 title  => $title
                 , status_id => $status_id
-                , developer_id => $developer_id
+                , user_id => $user_id
             });
 
         # Assign the Ticket object to the stash for display and set template
@@ -130,13 +130,13 @@ sub create_form_do :Chained('base') :PathPart('create_form_do') :Args(0) {
     # Retrieve the values from the form
     my $title     = $c->request->params->{title}     || 'N/A';
     my $status_id    = $c->request->params->{status_id}    || 'N/A';
-    my $developer_id = $c->request->params->{developer_id} || '1';
+    my $user_id = $c->request->params->{user_id} || '1';
  
     # Create the ticket
     my $ticket = $c->model('DB::Ticket')->create({
             title   => $title,
             status_id  => $status_id,
-            developer_id  => $developer_id,
+            user_id  => $user_id,
         });
  
     # Store new model object in stash and set template

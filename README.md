@@ -31,12 +31,13 @@ http://localhost:3000/
 ```
 
 ## Sample users:
-- test01 is admin
-- test02 is developer
-- test03 is plain user
+- test01 is admin Sally
+- test02 is developer Bob
+- test03 is plain user Charlie
 - all 3 have the same password 'mypass'
 
 ## Roles
-- admin can delete, admin the user roles
-- developer can edit, assign
-- plain user can create tickets and comment on them (no role in roles DB - all users are "user" role)
+- admin can delete tickets, admin the user roles and deactivate user
+- developer can edit, assign tickets
+- plain user can create tickets, list tickets, and comment on them (no role in roles DB - all users are "user" role)
+- anonymous user can see home page, contact, about-us, login, and create new ticket

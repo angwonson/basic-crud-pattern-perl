@@ -3,25 +3,25 @@ Simple CRUD application written in Perl using SQLite database and Catalyst Frame
 
 ## Assumptions:
 - Fedora 35 on EC2. Any *nix should work, but you would need to adjust the yum/dnf command to match your distro, or let cpanm install the dependencies for you.
-- Install cpan modules as root. If you need to add sudo to the yum and cpanm commands, please do so. As you can see the sigil represents a root login, not a regular user.
+- Install cpan modules as root. If you need to add sudo to the yum and cpanm commands, please do so.
 
 ## Install available dependencies the easy way
 ```
-$ yum install perl-DBD-SQLite perl-DBIx-Class perl-devel perl-Catalyst-Devel perl-Carp-Assert-More perl-Test-Taint perl-Devel-Cycle perl-HTML-Form perl-Test-Memory-Cycle perl-Test-NoWarnings perl-Catalyst-Plugin-Authentication perl-Catalyst-Plugin-Authorization-Roles perl-Test-WWW-Mechanize-PSGI perl-Catalyst-Plugin-Authorization-ACL perl-Catalyst-Plugin-Session-State-Cookie perl-Catalyst-Plugin-Session-Store-FastMmap perl-Catalyst-Controller-HTML-FormFu perl-Catalyst-Plugin-StackTrace perl-Catalyst-View-TT perl-Catalyst-Model-DBIC-Schema perl-Catalyst-Manual perl-DBIx-Class-TimeStamp perl-DateTime-Format-SQLite perl-Catalyst-Plugin-Session-Store-File perl-Authen-Passphrase perl-Class-Mix perl-Crypt-Eksblowfish perl-Crypt-MySQL perl-Data-Entropy perl-Data-Float perl-Test-WWW-Mechanize-Catalyst perl-HTML-FormFu-Element-reCAPTCHA perl-HTML-FormFu-Model-DBIC perl-HTML-FormFu-Model-DBIC-tests perl-HTML-FormFu-MultiForm
+[root@localhost ~]# yum install perl-DBD-SQLite perl-DBIx-Class perl-devel perl-Catalyst-Devel perl-Carp-Assert-More perl-Test-Taint perl-Devel-Cycle perl-HTML-Form perl-Test-Memory-Cycle perl-Test-NoWarnings perl-Catalyst-Plugin-Authentication perl-Catalyst-Plugin-Authorization-Roles perl-Test-WWW-Mechanize-PSGI perl-Catalyst-Plugin-Authorization-ACL perl-Catalyst-Plugin-Session-State-Cookie perl-Catalyst-Plugin-Session-Store-FastMmap perl-Catalyst-Controller-HTML-FormFu perl-Catalyst-Plugin-StackTrace perl-Catalyst-View-TT perl-Catalyst-Model-DBIC-Schema perl-Catalyst-Manual perl-DBIx-Class-TimeStamp perl-DateTime-Format-SQLite perl-Catalyst-Plugin-Session-Store-File perl-Authen-Passphrase perl-Class-Mix perl-Crypt-Eksblowfish perl-Crypt-MySQL perl-Data-Entropy perl-Data-Float perl-Test-WWW-Mechanize-Catalyst perl-HTML-FormFu-Element-reCAPTCHA perl-HTML-FormFu-Model-DBIC perl-HTML-FormFu-Model-DBIC-tests perl-HTML-FormFu-MultiForm
 ```
 
 ## Install remaining dependencies by cpanm
 #### The following are not currently available via yum/dnf on fc35, so we install it via cpanm after all the other dependencies
 ```
-$ cpanm Task::Catalyst::Tutorial 
-$ cpanm DBIx::Class::PassphraseColumn
-$ cpanm Catalyst::Plugin::StatusMessage
+[root@localhost ~]# cpanm Task::Catalyst::Tutorial 
+[root@localhost ~]# cpanm DBIx::Class::PassphraseColumn
+[root@localhost ~]# cpanm Catalyst::Plugin::StatusMessage
 ```
 
 ## Start the server
 ```
-$ cd Bugnilla
-$ script/bugnilla_server.pl
+[user@localhost ~]$ cd Bugnilla
+[user@localhost ~]$ script/bugnilla_server.pl
 ```
 
 ## Open up a browser

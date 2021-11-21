@@ -55,7 +55,8 @@ sub list :Chained('base') :PathPart('list') :Args(0) {
 Create a ticket with the supplied title, status_id (default should be "New", and user_id can be blank (unassigned)
 
 =cut
- 
+
+# NOTE: This isn't used by anything. This could be the start of our REST API if we chang ethe output to json
 sub url_create :Chained('base') :PathPart('url_create') :Args(3) {
     # In addition to self & context, get the title, status_id, &
     # user_id args from the URL.  Note that Catalyst automatically
@@ -104,45 +105,6 @@ sub base :Chained('/') :PathPart('tickets') :CaptureArgs(0) {
 
     # Load status messages (Catalyst::Plugin::StatusMessage)
     $c->load_status_msgs;
-}
-
-=head2 create_form
- 
-Display form to collect information for ticket to create
- 
-=cut
- 
-sub create_form :Chained('base') :PathPart('create_form') :Args(0) {
-    my ($self, $c) = @_;
- 
-    # Set the TT template to use
-    $c->stash(template => 'tickets/create_form.tt2');
-}
-
-=head2 create_form_do
- 
-Take information from form and add to database
- 
-=cut
- 
-sub create_form_do :Chained('base') :PathPart('create_form_do') :Args(0) {
-    my ($self, $c) = @_;
- 
-    # Retrieve the values from the form
-    my $title     = $c->request->params->{title}     || 'N/A';
-    my $status_id    = $c->request->params->{status_id}    || 'N/A';
-    my $user_id = $c->request->params->{user_id} || '1';
- 
-    # Create the ticket
-    my $ticket = $c->model('DB::Ticket')->create({
-            title   => $title,
-            status_id  => $status_id,
-            user_id  => $user_id,
-        });
- 
-    # Store new model object in stash and set template
-    $c->stash(ticket   => $ticket,
-              template => 'tickets/create_done.tt2');
 }
 
 =head2 get_ticket_object
@@ -250,13 +212,13 @@ sub list_recent_tcp :Chained('base') :PathPart('list_recent_tcp') :Args(1) {
     $c->stash(template => 'tickets/list.tt2');
 }
 
-=head2 formfu_create
+=head2 create
  
 Use HTML::FormFu to create a new ticket
  
 =cut
  
-sub formfu_create :Chained('base') :PathPart('formfu_create') :Args(0) :FormConfig {
+sub create :Chained('base') :PathPart('create') :Args(0) :FormConfig {
     my ($self, $c) = @_;
  
     # Get the form that the :FormConfig attribute saved in the stash
@@ -272,7 +234,7 @@ sub formfu_create :Chained('base') :PathPart('formfu_create') :Args(0) :FormConf
         $form->model->update($ticket);
         # Set a status message for the user & return to tickets list
         $c->response->redirect($c->uri_for($self->action_for('list'),
-            {mid => $c->set_status_msg("Ticket created")}));
+            {mid => $c->set_status_msg("Ticket created: #" . $ticket->id)}));
         $c->detach;
     } else {
         # Get the users from the DB

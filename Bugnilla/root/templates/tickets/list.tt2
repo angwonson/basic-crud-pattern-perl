@@ -11,10 +11,11 @@
 
 [% # Some basic HTML with a loop to display tickets -%]
 <table>
-<tr><th>ID</th><th>Title</th><th>Status</th><th>User</th><th>Links</th></tr>
+<tr><th>&nbsp;</th><th>ID</th><th>Title</th><th>Status</th><th>User</th><th>Links</th></tr>
 [% # Display each ticket in a table row %]
 [% FOREACH ticket IN tickets -%]
   <tr>
+    <td><a href="[% c.uri_for(c.controller.action_for('delete'), [ticket.id]) %]">[X]</a></td>
     <td>[% ticket.id %]</td>
     <td>[% ticket.title %]</td>
     <td>[% ticket.status.status %]</td>
@@ -26,8 +27,8 @@
 [% END %]
 </td>
     <td>
-        [% # Add a link to delete a ticket %]
-        <a href="[% c.uri_for(c.controller.action_for('delete'), [ticket.id]) %]">Delete</a>
+        [% # Add a link to edit a ticket %]
+        <a href="[% c.uri_for(c.controller.action_for('edit'), [ticket.id]) %]">Edit</a>
     </td>
   </tr>
 [% END -%]

@@ -245,9 +245,22 @@ sub create :Chained('base') :PathPart('create') :Args(0) :FormConfig {
             push(@users, [$_->id, $_->first_name]);
         }
         # Get the select added by the config file
-        my $select = $form->get_element({type => 'Select'});
+        my $select = $form->get_element({type => 'Select', name => 'user_id'});
         # Add the users to it
         $select->options(\@users);
+
+        # Get the status options from the DB
+        my @status_objs = $c->model("DB::Status")->all();
+        # Create an array of arrayrefs where each arrayref is an status
+        my @statuses;
+        # order by id so New shows up first
+        foreach (sort {$a->id cmp $b->id} @status_objs) {
+            push(@statuses, [$_->id, $_->status]);
+        }
+        # Get the select added by the config file
+        my $select2 = $form->get_element({type => 'Select', name => 'status_id'});
+        # Add the statuses to it
+        $select2->options(\@statuses);
     }
  
     # Set the template

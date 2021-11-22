@@ -17,7 +17,7 @@
   <tr>
     <td><a href="[% c.uri_for(c.controller.action_for('delete'), [ticket.id]) %]">[X]</a></td>
     <td>[% ticket.id %]</td>
-    <td>[% ticket.title %]</td>
+    <td><a href="[% c.uri_for(c.controller.action_for('view'), [ticket.id]) %]">[% ticket.title %]</a></td>
     <td>[% ticket.status.status %]</td>
     <td>
 [% IF ticket.createdby_user.first_name %]
@@ -36,6 +36,8 @@
     <td>
         [% # Add a link to edit a ticket %]
         <a href="[% c.uri_for(c.controller.action_for('edit'), [ticket.id]) %]">Edit</a>
+ | 
+        <a href="[% c.uri_for(c.controller.action_for('view'), [ticket.id]) %]">View/Comment</a>
     </td>
   </tr>
 [% END -%]

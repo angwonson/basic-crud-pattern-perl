@@ -300,7 +300,7 @@ sub edit :Chained('get_ticket_object') :PathPart('edit') :Args(0)
     unless ($ticket) {
         # Set an error message for the user & return to tickets list
         $c->response->redirect($c->uri_for($self->action_for('list'),
-            {mid => $c->set_error_msg("Invalid ticket -- Cannot edit")}));
+            {mid => $c->set_error_msg("Invalid ticket -- Cannot Edit")}));
         $c->detach;
     }
  
@@ -350,6 +350,36 @@ sub edit :Chained('get_ticket_object') :PathPart('edit') :Args(0)
     # Set the template
     $c->stash(template => 'tickets/formfu_create.tt2');
 }
+
+=head2 edit
+ 
+View a ticket, allow commenting
+ 
+=cut
+ 
+sub view :Chained('get_ticket_object') :PathPart('view') :Args(0) {
+    my ($self, $c, $ticket_id) = @_;
+
+    $c->log->debug('*** SUB EDIT CHECK PERMISSIONS ***');
+    $c->detach('/error_noperms')
+        unless $c->stash->{ticket_object}->comment_allowed_by($c->user->get_object);
+
+    # Get the specified ticket already saved by the 'ticket_object' method
+    my $ticket = $c->stash->{ticket_object};
+ 
+    # Make sure we were able to get a ticket
+    unless ($ticket) {
+        # Set an error message for the user & return to tickets list
+        $c->response->redirect($c->uri_for($self->action_for('list'),
+            {mid => $c->set_error_msg("Invalid ticket -- Cannot View")}));
+        $c->detach;
+    }
+
+    $c->stash(ticket => $ticket);
+ 
+    $c->stash(template => 'tickets/view.tt2');
+}
+
 
 
 =encoding utf8

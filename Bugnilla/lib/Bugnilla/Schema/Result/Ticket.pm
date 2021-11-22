@@ -245,5 +245,19 @@ sub edit_allowed_by {
     return $user->has_role('Admin') || $user->has_role('Developer');
 }
 
+=head2 comment_allowed_by
+ 
+Can the specified user comment the current ticket?
+ 
+=cut
+ 
+sub comment_allowed_by {
+    my ($self, $user) = @_;
+ 
+    # All logged in users can comment
+    return $user->id;
+}
+
+
 __PACKAGE__->meta->make_immutable;
 1;

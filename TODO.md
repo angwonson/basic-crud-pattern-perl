@@ -6,7 +6,7 @@
 - [x] fix error message on login screen. Should not complain about missing u/p when you first land on the page
 #### Ticket Features
 - [x] show individual ticket page with comments
-- [ ] comment on a ticket
+- [x] comment on a ticket
 - [x] filter by status
 - [ ] assign a ticket to myself link on list page
 - [x] change status link on list page

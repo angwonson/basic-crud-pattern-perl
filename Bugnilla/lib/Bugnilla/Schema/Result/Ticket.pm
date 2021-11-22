@@ -187,9 +187,24 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 ticket_comments
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-21 17:33:27
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1nqHberUQ011k2dd/W8BNA
+Type: has_many
+
+Related object: L<Bugnilla::Schema::Result::TicketComment>
+
+=cut
+
+__PACKAGE__->has_many(
+  "ticket_comments",
+  "Bugnilla::Schema::Result::TicketComment",
+  { "foreign.ticket_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-21 20:32:03
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YT/rSiiBdQWEtRe7SoDpVg
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

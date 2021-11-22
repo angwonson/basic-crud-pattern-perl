@@ -126,6 +126,21 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 ticket_comments
+
+Type: has_many
+
+Related object: L<Bugnilla::Schema::Result::TicketComment>
+
+=cut
+
+__PACKAGE__->has_many(
+  "ticket_comments",
+  "Bugnilla::Schema::Result::TicketComment",
+  { "foreign.createdby_user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
 =head2 ticket_createdby_users
 
 Type: has_many
@@ -167,8 +182,8 @@ Composing rels: L</user_roles> -> role
 __PACKAGE__->many_to_many("roles", "user_roles", "role");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-21 17:33:27
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YhvZgim64yWXQUPqTDp2Gw
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-21 20:32:03
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:qS1BYgVykxFTa2vnR5x0ag
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

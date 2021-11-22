@@ -16,6 +16,10 @@
 - [ ] allow form to submit without status or developer (default status is New and default developer should be undefined)
 - [x] allow form to submit without being logged in
 - [x] add created_by column and make 'anonymous' the default
+#### Search Features
+- [ ] Search ticket title and description
+- [ ] Search ticket comments
+
 
 ## LOWER PRIORITY
 - [ ] REST API

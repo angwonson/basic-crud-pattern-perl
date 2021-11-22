@@ -53,7 +53,18 @@ __PACKAGE__->table("ticket");
   data_type: 'text'
   is_nullable: 0
 
-=head2 user_id
+=head2 description
+
+  data_type: 'text'
+  is_nullable: 1
+
+=head2 createdby_user_id
+
+  data_type: 'integer'
+  is_foreign_key: 1
+  is_nullable: 1
+
+=head2 assignedto_user_id
 
   data_type: 'integer'
   is_foreign_key: 1
@@ -83,7 +94,11 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "title",
   { data_type => "text", is_nullable => 0 },
-  "user_id",
+  "description",
+  { data_type => "text", is_nullable => 1 },
+  "createdby_user_id",
+  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
+  "assignedto_user_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
   "status_id",
   {
@@ -112,6 +127,46 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
+=head2 assignedto_user
+
+Type: belongs_to
+
+Related object: L<Bugnilla::Schema::Result::User>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "assignedto_user",
+  "Bugnilla::Schema::Result::User",
+  { id => "assignedto_user_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
+=head2 createdby_user
+
+Type: belongs_to
+
+Related object: L<Bugnilla::Schema::Result::User>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "createdby_user",
+  "Bugnilla::Schema::Result::User",
+  { id => "createdby_user_id" },
+  {
+    is_deferrable => 0,
+    join_type     => "LEFT",
+    on_delete     => "NO ACTION",
+    on_update     => "NO ACTION",
+  },
+);
+
 =head2 status
 
 Type: belongs_to
@@ -132,29 +187,9 @@ __PACKAGE__->belongs_to(
   },
 );
 
-=head2 user
 
-Type: belongs_to
-
-Related object: L<Bugnilla::Schema::Result::User>
-
-=cut
-
-__PACKAGE__->belongs_to(
-  "user",
-  "Bugnilla::Schema::Result::User",
-  { id => "user_id" },
-  {
-    is_deferrable => 0,
-    join_type     => "LEFT",
-    on_delete     => "NO ACTION",
-    on_update     => "NO ACTION",
-  },
-);
-
-
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-20 15:57:52
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:whgCglT6YEgsIsEC1rfPVg
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-21 17:33:27
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:1nqHberUQ011k2dd/W8BNA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

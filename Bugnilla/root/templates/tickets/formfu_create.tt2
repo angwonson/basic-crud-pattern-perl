@@ -2,6 +2,3 @@
  
 [%# Render the HTML::FormFu Form %]
 [% form %]
- 
-<p><a href="[% c.uri_for(c.controller.action_for('list'))
-    %]">Return to ticket list</a></p>

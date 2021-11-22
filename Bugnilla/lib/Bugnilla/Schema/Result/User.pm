@@ -111,7 +111,7 @@ __PACKAGE__->set_primary_key("id");
 
 =head1 RELATIONS
 
-=head2 tickets
+=head2 ticket_assignedto_users
 
 Type: has_many
 
@@ -120,9 +120,24 @@ Related object: L<Bugnilla::Schema::Result::Ticket>
 =cut
 
 __PACKAGE__->has_many(
-  "tickets",
+  "ticket_assignedto_users",
   "Bugnilla::Schema::Result::Ticket",
-  { "foreign.user_id" => "self.id" },
+  { "foreign.assignedto_user_id" => "self.id" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 ticket_createdby_users
+
+Type: has_many
+
+Related object: L<Bugnilla::Schema::Result::Ticket>
+
+=cut
+
+__PACKAGE__->has_many(
+  "ticket_createdby_users",
+  "Bugnilla::Schema::Result::Ticket",
+  { "foreign.createdby_user_id" => "self.id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
@@ -152,8 +167,8 @@ Composing rels: L</user_roles> -> role
 __PACKAGE__->many_to_many("roles", "user_roles", "role");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-20 15:57:52
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:uht6u0wp11V2PYfjYbPM3w
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2021-11-21 17:33:27
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:YhvZgim64yWXQUPqTDp2Gw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

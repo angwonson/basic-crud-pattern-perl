@@ -33,13 +33,20 @@ sub index :Path :Args(0) {
 Fetch all ticket objects and pass to tickets/list.tt2 in stash to be displayed
  
 =cut
- 
+
 sub list :Chained('base') :PathPart('list') :Args(0) {
-    # Retrieve the usual Perl OO '$self' for this object. $c is the Catalyst
-    # 'Context' that's used to 'glue together' the various components
-    # that make up the application
     my ($self, $c) = @_;
  
+    # Get the status options from the DB
+    my @status_objs = $c->model("DB::Status")->all();
+    # Create an array of arrayrefs where each arrayref is an status
+    my @statuses;
+    # order by id so New shows up first
+    foreach (sort {$a->id cmp $b->id} @status_objs) {
+        push(@statuses, {id => $_->id, status => $_->status});
+    }
+    $c->stash(statuses => \@statuses); # used by template to show current filter
+
     # Retrieve all of the ticket records as ticket model objects and store in the
     # stash where they can be accessed by the TT template
     $c->stash(tickets => [$c->model('DB::Ticket')->all]);
@@ -48,6 +55,34 @@ sub list :Chained('base') :PathPart('list') :Args(0) {
     # in your action methods (action methods respond to user input in
     # your controllers).
     $c->stash(template => 'tickets/list.tt2'); # this is default so no need to specify unless you want to use $c->forward or $c->detach
+}
+
+=head2 filter_list
+ 
+Fetch all ticket objects and pass to tickets/list.tt2 in stash to be displayed
+ 
+=cut
+
+sub filter_list :Chained('base') :PathPart('filter_list') :Args(1) {
+    my ($self, $c, $status_id) = @_;
+    $c->stash(current_status_id => $status_id); # used by template to show current filter
+
+    # show the clear filter link in the template
+    $c->stash(filtered => 1);
+
+    # Get the status options from the DB
+    my @status_objs = $c->model("DB::Status")->all();
+    # Create an array of arrayrefs where each arrayref is an status
+    my @statuses;
+    # order by id so New shows up first
+    foreach (sort {$a->id cmp $b->id} @status_objs) {
+        push(@statuses, {id => $_->id, status => $_->status});
+    }
+    $c->stash(statuses => \@statuses); # used by template to show current filter
+ 
+    $c->stash(tickets => [$c->model('DB::Ticket')->search({status_id => $status_id})]);
+
+    $c->stash(template => 'tickets/list.tt2');
 }
 
 =head2 url_create

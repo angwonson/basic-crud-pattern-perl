@@ -21,11 +21,14 @@
 <textarea rows=3 cols=23></textarea>
 
 <h3>Comments</h3>
-[% # Some basic HTML with a loop to display tickets -%]
-<table>
+[% IF ticket_comments.size < 1 %]
+<div span="error">No comments were found for this ticket. Create one above.</div>
+[% ELSE %]
+
+<table class="paddeddatagrid">
 <tr><th>ID</th><th>Comment</th><th>Created By</th></tr>
 [% FOREACH comment IN ticket_comments -%]
-  <tr>
+  <tr class="[% IF loop.index % 2 %]rowlite[% ELSE %]rowdark[% END %]">
     <td>[% comment.id %]</td>
     <td>[% comment.comment %]</td>
     <td>
@@ -38,5 +41,7 @@
 </tr>
 [% END -%]
 </table>
+[% END -%]
+[% # END of IF # of comments -%]
 
 <p><a href="[% c.uri_for('/tickets/list') %]">Return to Ticket List</a></p>

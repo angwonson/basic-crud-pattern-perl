@@ -53,7 +53,9 @@ INSERT INTO status VALUES (5, "Won't Fix");
 CREATE TABLE ticket (
         id          INTEGER PRIMARY KEY,
         title       TEXT NOT NULL,
-        user_id        INTEGER REFERENCES users(id),
+        description       TEXT,
+        createdby_user_id        INTEGER REFERENCES users(id),
+        assignedto_user_id        INTEGER REFERENCES users(id),
         status_id      INTEGER REFERENCES status(id) DEFAULT 1,
         created TIMESTAMP,
         updated TIMESTAMP
@@ -61,22 +63,22 @@ CREATE TABLE ticket (
 --
 -- Load up some initial test data
 --
-INSERT INTO ticket VALUES (1, 'Build a website', 3, 1, datetime('now'), datetime('now'));
-INSERT INTO ticket VALUES (2, 'Have some coffee', 1, 2, datetime('now'), datetime('now'));
-INSERT INTO ticket VALUES (3, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
-INSERT INTO ticket VALUES (4, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
-INSERT INTO ticket VALUES (5, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
-INSERT INTO ticket VALUES (6, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
-INSERT INTO ticket VALUES (7, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
-INSERT INTO ticket VALUES (8, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
-INSERT INTO ticket VALUES (9, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
-INSERT INTO ticket VALUES (10, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
-INSERT INTO ticket VALUES (11, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
-INSERT INTO ticket VALUES (12, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
-INSERT INTO ticket VALUES (13, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
-INSERT INTO ticket VALUES (14, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
-INSERT INTO ticket VALUES (15, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
-INSERT INTO ticket VALUES (16, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
-INSERT INTO ticket VALUES (17, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
-INSERT INTO ticket VALUES (18, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
-INSERT INTO ticket VALUES (19, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (1, 'Build a website', 3, 1, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (2, 'Have some coffee', 1, 2, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (3, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (4, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (5, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (6, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (7, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (8, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (9, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (10, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (11, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (12, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (13, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (14, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (15, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (16, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (17, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (18, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
+INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (19, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));

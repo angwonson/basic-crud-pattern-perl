@@ -116,7 +116,6 @@ The about-us page (/about-us)
 =cut
 
 sub aboutus :Path('/about-us') :Args(0) {
-#sub aaboutus :PathPart('/about-us') :Args(0) {
     my ( $self, $c ) = @_;
 
     $c->stash(template => 'about-us.tt2');

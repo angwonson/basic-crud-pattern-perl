@@ -188,17 +188,14 @@ __PACKAGE__->many_to_many("roles", "user_roles", "role");
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 
-# many_to_many():
-#   args:
-#     1) Name of relationship, DBIC will create accessor with this name
-#     2) Name of has_many() relationship this many_to_many() is shortcut for
-#     3) Name of belongs_to() relationship in model class of has_many() above
-#   You must already have the has_many() defined to use a many_to_many().
-#__PACKAGE__->many_to_many(roles => 'user_roles', 'role');
-# NOTE This causes compaints when updating the DBIC due to PassphraseColumn trying to create methods with the same name as 'roles'
+=head2 roles
 
-# Have the 'password' column use a SHA-1 hash and 20-byte salt
-# with RFC 2307 encoding; Generate the 'check_password" method
+Customizing our hash algo used by the password column - see inline comments above
+Have the 'password' column use a SHA-1 hash and 20-byte salt
+with RFC 2307 encoding; Generate the 'check_password" method
+
+=cut
+
 __PACKAGE__->add_columns(
     'password' => {
         passphrase       => 'rfc2307',

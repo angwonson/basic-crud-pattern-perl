@@ -158,3 +158,5 @@ cp bugnilla.db bugnillaTEST.db
 #### Do not allow users to be deleted, this will break the relationship with tickets assigned to that user
 #### Instead we can just make them inactive:
 #### UPDATE user SET active = 0 WHERE user = 2;
+
+# createdby_user_id column in ticket_comment table should be NOT NULL, but I left it in case we still need to show the entire app in anonymous mode

@@ -81,4 +81,18 @@ INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','upd
 INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (16, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
 INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (17, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
 INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (18, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
-INSERT INTO ticket ('id','title','assignedto_user_id','status_id','created','updated') VALUES (19, 'Read a magazine', 2, 5, datetime('now'), datetime('now'));
+
+--
+-- Add comments for tickets
+--
+CREATE TABLE ticket_comment (
+        id          INTEGER PRIMARY KEY,
+        ticket_id        INTEGER REFERENCES ticket(id),
+        comment       TEXT NOT NULL,
+        createdby_user_id        INTEGER REFERENCES users(id) NOT NULL,
+        created TIMESTAMP,
+        updated TIMESTAMP
+);
+INSERT INTO ticket_comment ('id','ticket_id','comment','createdby_user_id','created','updated') VALUES (1, 3, 'First comment', 2, datetime('now'), datetime('now'));
+INSERT INTO ticket_comment ('id','ticket_id','comment','createdby_user_id','created','updated') VALUES (2, 1, 'First comment', 3, datetime('now'), datetime('now'));
+INSERT INTO ticket_comment ('id','ticket_id','comment','createdby_user_id','created','updated') VALUES (3, 2, 'First comment', 1, datetime('now'), datetime('now'));

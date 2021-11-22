@@ -52,17 +52,17 @@ sub list :Chained('base') :PathPart('list') :Args(0) {
 
 =head2 url_create
 
-Create a ticket with the supplied title, status_id (default should be "New", and user_id can be blank (unassigned)
+Create a ticket with the supplied title, status_id (default should be "New", and assignedto_user_id can be blank (unassigned)
 
 =cut
 
 # NOTE: This isn't used by anything. This could be the start of our REST API if we chang ethe output to json
 sub url_create :Chained('base') :PathPart('url_create') :Args(3) {
     # In addition to self & context, get the title, status_id, &
-    # user_id args from the URL.  Note that Catalyst automatically
+    # assignedto_user_id args from the URL.  Note that Catalyst automatically
     # puts extra information after the "/<controller_name>/<action_name/"
     # into @_.  The args are separated  by the '/' char on the URL.
-    my ($self, $c, $title, $status_id, $user_id) = @_;
+    my ($self, $c, $title, $status_id, $assignedto_user_id) = @_;
 
     # Check the user's roles
     $c->log->debug('*** URL CREATE CHECK AUTH ***');
@@ -72,7 +72,7 @@ sub url_create :Chained('base') :PathPart('url_create') :Args(3) {
         my $ticket = $c->model('DB::Ticket')->create({
                 title  => $title
                 , status_id => $status_id
-                , user_id => $user_id
+                , assignedto_user_id => $assignedto_user_id
             });
 
         # Assign the Ticket object to the stash for display and set template
@@ -254,7 +254,7 @@ sub create :Chained('base') :PathPart('create') :Args(0) :FormConfig {
             push(@users, [$_->id, $_->first_name]);
         }
         # Get the select added by the config file
-        my $select = $form->get_element({type => 'Select', name => 'user_id'});
+        my $select = $form->get_element({type => 'Select', name => 'assignedto_user_id'});
         # Add the users to it
         $select->options(\@users);
 
@@ -325,7 +325,7 @@ sub edit :Chained('get_ticket_object') :PathPart('edit') :Args(0)
             push(@users, [$_->id, $_->first_name]);
         }
         # Get the select added by the config file
-        my $select = $form->get_element({type => 'Select', name => 'user_id'});
+        my $select = $form->get_element({type => 'Select', name => 'assignedto_user_id'});
         # Add the users to it
         $select->options(\@users);
         # Populate the form with existing values from DB

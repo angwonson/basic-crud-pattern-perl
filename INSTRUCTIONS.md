@@ -1,4 +1,4 @@
-# Coding test for backend Perl developers
+# Coding test for Perl developers
 
 ## The Synopsis
 ============

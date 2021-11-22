@@ -17,7 +17,7 @@ https://metacpan.org/dist/Catalyst-Manual/view/lib/Catalyst/Manual/Tutorial.pod
 [root@localhost ~]# cpanm DBD::SQLite DBIx::Class Catalyst::Devel Carp::Assert::More Test::Taint Devel::Cycle HTML::Form Test::Memory::Cycle Test::NoWarnings Catalyst::Plugin::Authentication Catalyst::Plugin::Authorization::Roles Test::WWW::Mechanize::PSGI Catalyst::Plugin::Authorization::ACL Catalyst::Plugin::Session::State::Cookie Catalyst::Plugin::Session::Store::FastMmap Catalyst::Controller::HTML::FormFu Catalyst::Plugin::StackTrace Catalyst::View::TT Catalyst::Model::DBIC::Schema Catalyst::Manual DBIx::Class::TimeStamp DateTime::Format::SQLite Catalyst::Plugin::Session::Store::File Authen::Passphrase Class::Mix Crypt::Eksblowfish Crypt::MySQL Data::Entropy Data::Float Test::WWW::Mechanize::Catalyst HTML::FormFu::Element::reCAPTCHA HTML::FormFu::Model::DBIC HTML::FormFu::Model::DBIC::tests HTML::FormFu::MultiForm Task::Catalyst::Tutorial DBIx::Class::PassphraseColumn Catalyst::Plugin::StatusMessage
 ```
 
-#### I would not usually put a database, even SQLite into git, but the instructions say plainly to include a database with some data in it already. I've also included a simple shell script to create the db from the schema file.
+#### Here is how to create a sqlite db from the schema file(s):
 ```
 ./init_sqlite_db.sh
 ```
@@ -145,7 +145,7 @@ cp bugnilla.db bugnillaTEST.db
 ```
 [% #### This is a comment. -%]
 ```
-#### what the dashdoes is tell TT to remove the newline character.
+#### what the dash does is tell TT to remove the newline character.
 #### this helps with comments and other situations where you don't want the extra whitespace
 ***
 

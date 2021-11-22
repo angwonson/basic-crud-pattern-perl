@@ -1,0 +1,16 @@
+[% META title = 'View and Comment' %]
+
+<p>Ticket '[% ticket.title %]'
+
+ assigned to '[% ticket.assignedto_user.first_name %]'
+
+ with status '[% ticket.status.status %]'.
+</p>
+<p>Description:</p>
+<p>[% ticket.description %]</p>
+
+<p>Placeholder for comments form</p>
+
+<p>Placeholder for comments list</p>
+
+<p><a href="[% c.uri_for('/tickets/list') %]">Return to list</a></p>

@@ -21,7 +21,7 @@
 - [ ] REST API
 - [ ] auto crud
 - [ ] user/role management for admins
-- [ ] padding and maybe some color in the list table
+- [ ] padding and maybe some color in the list and comment list table
 - [ ] show and edit full_name instead of first_name
 - [ ] Add git hooks to prevent untracked files
 - [x] Make a list of cpan modules for those who are not running RPM based distro, so they can use cpanm to install all the dependencies

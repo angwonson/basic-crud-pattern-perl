@@ -7,21 +7,21 @@
 #### Ticket Features
 - [ ] show individual ticket page with comments
 - [ ] comment on a ticket
-- [ ] assign a ticket to me link on list page
+- [ ] assign a ticket to myself link on list page
 - [ ] change status link on list page
-- [ ] edit ticket title, status, developer assignment
+- [x] edit ticket title, description, status, developer assignment
 - [ ] filter by status
-- [ ] padding and maybe some color in the table
 #### Anonymous Features
 - [ ] disable authentication option - maybe config flag to let the system run without logins at all?
 - [ ] allow form to submit without status or developer (default status is New and default developer should be undefined)
 - [x] allow form to submit without being logged in
-- [ ] add created_by column and make 'anonymous' the default
+- [x] add created_by column and make 'anonymous' the default
 
 ## LOWER PRIORITY
 - [ ] REST API
 - [ ] auto crud
 - [ ] user/role management for admins
+- [ ] padding and maybe some color in the list table
 - [ ] show and edit full_name instead of first_name
 - [ ] Add git hooks to prevent untracked files
 - [x] Make a list of cpan modules for those who are not running RPM based distro, so they can use cpanm to install all the dependencies

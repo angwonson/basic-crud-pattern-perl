@@ -18,3 +18,33 @@ input[name=submit] {
 }
 label {display:block;}
 textarea { display:block;}
+table[name=ticket_filter_table] {
+    border-collapse:separate;
+    border-spacing:10px 0px;
+}
+tr[class=rowlite] {
+    padding: 5px;
+    background:#ccc;
+    color: #000;
+    border-collapse:separate;
+    border-spacing:10px 0px;
+}
+tr[class=rowdark] {
+    background:#92cff7;
+/*    background:#1f8dd6; */
+    color: #000;
+    border-collapse:separate;
+    border-spacing:10px 0px;
+}
+table[class=paddeddatagrid] td {
+    border: 1px solid #000000;
+    padding: 5px;
+}
+table[class=paddeddatagrid] a {
+    color: #023b61;
+}
+table[class=paddeddatagrid] th {
+    background: #023b61;
+    color: #ccc;
+    padding: 5px;
+}

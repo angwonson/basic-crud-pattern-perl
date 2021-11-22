@@ -414,12 +414,49 @@ sub view :Chained('get_ticket_object') :PathPart('view') :Args(0) {
 
     # get the comments for this ticket
     # get_comments_by_ticket_id() or get_comments()?
-    # get_comments(0 is a join, get_comments_by_ticket_id() is only selecting from ticket_comments table
+    # get_comments() is a join, get_comments_by_ticket_id() is only selecting from ticket_comments table
     #$c->stash(ticket_comments => [$c->model('DB::Ticket')->get_comments($ticket->id)]);
     # or
     $c->stash(ticket_comments => [$c->model('DB::TicketComment')->get_comments_by_ticket_id($ticket->id)]);
 
     $c->stash(template => 'tickets/view.tt2');
+}
+
+sub comment :Chained('get_ticket_object') :PathPart('comment') :Args(0) {
+    my ($self, $c) = @_;
+    my $comment = $c->req->body_params->{comment};
+
+    $c->log->debug('*** SUB COMMENT CHECK PERMISSIONS ***');
+    $c->detach('/error_noperms')
+        unless $c->stash->{ticket_object}->comment_allowed_by($c->user->get_object);
+
+    # Get the specified ticket already saved by the 'ticket_object' method
+    my $ticket = $c->stash->{ticket_object};
+
+    # Make sure we were able to get a ticket
+    unless ($ticket) {
+        # Set an error message for the user & return to tickets list
+        $c->response->redirect($c->uri_for($self->action_for('list'),
+            {mid => $c->set_error_msg("Invalid ticket -- Cannot View")}));
+        $c->detach;
+    }
+
+    $c->stash(ticket => $ticket);
+
+    if (length($comment) < 1) {
+        $c->response->redirect($c->uri_for($self->action_for('view'), [$ticket->id], {mid => $c->set_status_msg("You cannot post a blank comment.")}));
+        return 0;
+    }
+
+    ### Insert the comment
+    $c->model('DB::TicketComment')->create({
+                ticket_id  => $ticket->id
+                , comment  => $comment
+                , createdby_user_id  => $c->user()->id
+            });
+
+    ### Redirect back to view page
+    $c->response->redirect($c->uri_for($self->action_for('view'), [$ticket->id], {mid => $c->set_status_msg("Your comment was posted.")}));
 }
 
 

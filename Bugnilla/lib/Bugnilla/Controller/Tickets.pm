@@ -386,7 +386,7 @@ sub edit :Chained('get_ticket_object') :PathPart('edit') :Args(0)
     $c->stash(template => 'tickets/formfu_create.tt2');
 }
 
-=head2 edit
+=head2 view
  
 View a ticket, allow commenting
  
@@ -421,6 +421,12 @@ sub view :Chained('get_ticket_object') :PathPart('view') :Args(0) {
 
     $c->stash(template => 'tickets/view.tt2');
 }
+
+=head2 comment
+
+Endpoint for comment POST from webform
+
+=cut
 
 sub comment :Chained('get_ticket_object') :PathPart('comment') :Args(0) {
     my ($self, $c) = @_;

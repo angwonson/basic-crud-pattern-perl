@@ -39,6 +39,7 @@ http://localhost:3000/
 - developer can edit, assign tickets
 - plain user can create tickets, list tickets, and comment on them (no role in roles DB - all users are "user" role)
 - anonymous user can see home page, contact, about-us, login, and create new ticket
+- Charlie and Bob can see the delete button on the list page - this is intentional. They will get 'Permission Denied' error.
 
 ## Instructions
 - The instructions I received for this project are in the INSTRUCTIONS.md file.

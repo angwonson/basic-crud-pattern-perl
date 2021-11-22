@@ -147,5 +147,19 @@ __PACKAGE__->belongs_to(
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
+
+=head2 add_columns
+
+This is to let DBIx manage the timestamps
+
+=cut
+
+__PACKAGE__->add_columns(
+    "created",
+    { data_type => 'timestamp', set_on_create => 1 },
+    "updated",
+    { data_type => 'timestamp', set_on_create => 1, set_on_update => 1 },
+);
+
 __PACKAGE__->meta->make_immutable;
 1;

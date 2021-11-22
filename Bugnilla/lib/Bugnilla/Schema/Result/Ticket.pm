@@ -209,9 +209,12 @@ __PACKAGE__->has_many(
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
 
-#
-# Enable automatic date handling
-#
+=head2 add_columns
+
+This is to let DBIx manage the timestamps
+
+=cut
+
 __PACKAGE__->add_columns(
     "created",
     { data_type => 'timestamp', set_on_create => 1 },

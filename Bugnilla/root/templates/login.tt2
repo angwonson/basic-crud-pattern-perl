@@ -1,5 +1,13 @@
 [% META title = 'Login' %]
  
+[%
+    # This code illustrates how certain parts of the TT
+    # template will only be shown to users who have logged in
+%]
+[% IF c.user_exists %]
+    Please Note: You are already logged in as '[% c.user.username %]'.
+    You can <a href="[% c.uri_for('/logout') %]">logout</a> here.
+[% ELSE %]
 <!-- Login form -->
 <form method="post" action="[% c.uri_for('/login') %]">
     <table>
@@ -18,14 +26,7 @@
 </form>
 
 <p>
-[%
-    # This code illustrates how certain parts of the TT
-    # template will only be shown to users who have logged in
-%]
-[% IF c.user_exists %]
-    Please Note: You are already logged in as '[% c.user.username %]'.
-    You can <a href="[% c.uri_for('/logout') %]">logout</a> here.
-[% ELSE %]
+
     You need to log in to use this application.
 [% END %]
 [%#

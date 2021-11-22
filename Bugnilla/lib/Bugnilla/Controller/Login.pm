@@ -43,7 +43,7 @@ sub index :Path :Args(0) {
             # Set an error message
             $c->stash(error_msg => "Bad username or password.");
         }
-    } else {
+    } elsif ($username || $password) {
         # Set an error message
         $c->stash(error_msg => "Empty username or password.")
             unless ($c->user_exists);

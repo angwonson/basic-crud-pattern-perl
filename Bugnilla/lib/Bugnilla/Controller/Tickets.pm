@@ -358,9 +358,9 @@ View a ticket, allow commenting
 =cut
  
 sub view :Chained('get_ticket_object') :PathPart('view') :Args(0) {
-    my ($self, $c, $ticket_id) = @_;
+    my ($self, $c) = @_;
 
-    $c->log->debug('*** SUB EDIT CHECK PERMISSIONS ***');
+    $c->log->debug('*** SUB VIEW CHECK PERMISSIONS ***');
     $c->detach('/error_noperms')
         unless $c->stash->{ticket_object}->comment_allowed_by($c->user->get_object);
 
@@ -376,7 +376,14 @@ sub view :Chained('get_ticket_object') :PathPart('view') :Args(0) {
     }
 
     $c->stash(ticket => $ticket);
- 
+
+    # get the comments for this ticket
+    # get_comments_by_ticket_id() or get_comments()?
+    # get_comments(0 is a join, get_comments_by_ticket_id() is only selecting from ticket_comments table
+    #$c->stash(ticket_comments => [$c->model('DB::Ticket')->get_comments($ticket->id)]);
+    # or
+    $c->stash(ticket_comments => [$c->model('DB::TicketComment')->get_comments_by_ticket_id($ticket->id)]);
+
     $c->stash(template => 'tickets/view.tt2');
 }
 

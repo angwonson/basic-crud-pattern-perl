@@ -12,7 +12,9 @@ input {
 select {
     display: block;
 }
-.submit {
-    padding-top: .5em;
+input[name=submit] {
+    margin-top: .5em;
     display: block;
 }
+label {display:block;}
+textarea { display:block;}

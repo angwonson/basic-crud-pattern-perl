@@ -22,6 +22,7 @@
 - [ ] REST API
 - [ ] auto crud
 - [ ] user/role management for admins
+- [ ] show and edit full_name instead of first_name
 - [ ] Add git hooks to prevent untracked files
 - [x] Make a list of cpan modules for those who are not running RPM based distro, so they can use cpanm to install all the dependencies
 - [ ] navbar highlighting could be reduced to avoid repeating the same if statement in wrapper.tt2:

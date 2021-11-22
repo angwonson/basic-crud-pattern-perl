@@ -229,7 +229,10 @@ sub create :Chained('base') :PathPart('create') :Args(0) :FormConfig {
     # is shorthand for "$form->submitted && !$form->has_errors"
     if ($form->submitted_and_valid) {
         # Create a new ticket
-        my $ticket = $c->model('DB::Ticket')->new_result({});
+        # add createdby_user_id if it is available (log who made the ticket if not anonymous)
+        my $current_user_id = $c->user()->id if $c->user;
+        my $ticket = $c->model('DB::Ticket')->new_result({createdby_user_id => $current_user_id});
+
         # Save the form data for the ticket
         $form->model->update($ticket);
 
@@ -273,7 +276,6 @@ sub create :Chained('base') :PathPart('create') :Args(0) :FormConfig {
     }
  
     # Set the template
-#    $c->stash(template => 'tickets/formfu_create.tt2') if $c->user;
     $c->stash(template => 'tickets/formfu_create.tt2');
 }
 
@@ -311,7 +313,6 @@ sub edit :Chained('get_ticket_object') :PathPart('edit') :Args(0)
     if ($form->submitted_and_valid) {
         # Save the form data for the ticket
         $form->model->update($ticket);
-        # Set a status message for the user
         # Set a status message for the user & return to tickets list
         $c->response->redirect($c->uri_for($self->action_for('list'),
             {mid => $c->set_status_msg("Ticket edited: #" . $ticket->id)}));

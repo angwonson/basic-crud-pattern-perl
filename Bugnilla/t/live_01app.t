@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 use Test::More;
+use Data::Dumper;
  
 # Need to specify the name of your app as arg on next line
 # Can also do:
@@ -99,10 +100,11 @@ $ua1->get_ok("http://localhost/tickets/list", "'test01' ticket list");
 $ua1->title_is("Ticket List", "Check logged in and at ticket list");
 $ua1->content_contains("Ticket List", "Ticket List page test");
 $ua1->content_contains("TestTitle", "Look for 'TestTitle'");
- 
+
 # Make sure the new ticket can be deleted
 # Get all the Delete links on the list page
-my @delLinks = $ua1->find_all_links(text => 'Delete');
+my @delLinks = $ua1->find_all_links(text => '[X]');
+
 # Use the final link to delete the last ticket
 $ua1->get_ok($delLinks[$#delLinks]->url, 'Delete last ticket');
 # Check that delete worked

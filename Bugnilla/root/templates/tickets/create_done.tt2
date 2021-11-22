@@ -15,7 +15,7 @@
 <p>Added ticket '[% ticket.title %]'
 
 [% # Then, output the first name of the assigned user -%]
- assigned to '[% ticket.user.first_name %]'
+ assigned to '[% ticket.assignedto_user.first_name %]'
 
 [% # Then, output the status -%]
  with status '[% ticket.status.status %]'.

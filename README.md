@@ -16,9 +16,14 @@ Simple CRUD application written in Perl using SQLite database and Catalyst Frame
 [root@localhost ~]# cpanm Task::Catalyst::Tutorial DBIx::Class::PassphraseColumn Catalyst::Plugin::StatusMessage
 ```
 
-## Start the server
+## Run Makefile.PL
 ```
 [user@localhost ~]$ cd Bugnilla
+[user@localhost ~]$ perl Makefile.PL
+```
+
+## Start the server
+```
 [user@localhost ~]$ script/bugnilla_server.pl
 ```
 

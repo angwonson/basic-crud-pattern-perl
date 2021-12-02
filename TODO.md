@@ -32,3 +32,5 @@
 - [ ] navbar item code could be reduced to avoid repeating the same if statement in wrapper.tt2
 - [ ] protect from JS/SQl injection. JS is currently allowed in comments and needs to be blocked.
 - [ ] Fix UTF8
+- [ ] Adjust schema to make certain columns unique, such as username
+

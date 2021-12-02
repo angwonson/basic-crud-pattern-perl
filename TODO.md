@@ -30,3 +30,5 @@
 - [ ] Add git hooks to prevent untracked files
 - [x] Make a list of cpan modules for those who are not running RPM based distro, so they can use cpanm to install all the dependencies
 - [ ] navbar item code could be reduced to avoid repeating the same if statement in wrapper.tt2
+- [ ] protect from JS/SQl injection. JS is currently allowed in comments and needs to be blocked.
+- [ ] Fix UTF8
